@@ -16,9 +16,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     <motion.article
       variants={staggerItem}
       whileHover={{ y: -6 }}
-      transition={{ type: "spring", stiffness: 280, damping: 24 }}
+      transition={{ type: "spring", stiffness: 320, damping: 26 }}
       className={cn(
-        "surface-elevated group relative flex flex-col overflow-hidden",
+        "surface-elevated gpu group relative flex flex-col overflow-hidden",
         isPlaceholder && "border-dashed"
       )}
     >

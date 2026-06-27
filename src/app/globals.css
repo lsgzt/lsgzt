@@ -169,11 +169,18 @@
   --sidebar-border: rgba(255, 255, 255, 0.08);
   --sidebar-ring: #7c3aed;
 
-  /* Aurora gradient blobs — dark mode: purple → indigo → blue */
-  --aurora-1: rgba(124, 58, 237, 0.45); /* violet */
-  --aurora-2: rgba(59, 130, 246, 0.4);  /* blue */
-  --aurora-3: rgba(67, 56, 202, 0.4);   /* indigo */
-  --aurora-4: rgba(168, 85, 247, 0.3);  /* purple wash */
+  /*
+    Aurora gradient blobs — dark mode (Vercel-inspired, very moody):
+      top-left    → soft indigo glow
+      top-right   → tiny purple glow
+      bottom-left → almost black
+      bottom-right→ black
+      center      → very subtle navy
+  */
+  --aurora-1: rgba(99, 102, 241, 0.30); /* soft indigo (top-left) */
+  --aurora-2: rgba(168, 85, 247, 0.18); /* tiny purple (top-right) */
+  --aurora-3: rgba(15, 23, 42, 0.60);   /* subtle navy (center) */
+  --aurora-4: rgba(2, 2, 5, 0.85);      /* near-black wash (bottom) */
 
   /* Gradient text — starts and ends on white so it glows on black */
   --gradient-from: #ffffff;
@@ -195,10 +202,29 @@
     @apply border-border outline-ring/50;
   }
 
+  /*
+    Horizontal overflow protection.
+    Some decorative elements (aurora blobs with -left/-right offsets, floating
+    hero badges) extend past the viewport on purpose. Without this guard, mobile
+    users can swipe the whole page sideways and reveal empty space.
+    `overflow-x: clip` is preferred over `hidden` because it doesn't create a
+    scroll container (so position: sticky inside the page keeps working).
+  */
   html {
+    overflow-x: clip;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: 6rem;
+  }
+  body {
+    overflow-x: clip;
+  }
+  /* Fallback for browsers that don't support overflow-x: clip */
+  @supports not (overflow-x: clip) {
+    html,
+    body {
+      overflow-x: hidden;
+    }
   }
 
   body {
@@ -337,7 +363,30 @@
     position: absolute;
     border-radius: 9999px;
     filter: blur(80px);
+    /* GPU layer promotion + smoothing for the drifting motion */
     will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /*
+    Premium easing curve used across motion elements.
+    A refined ease-out that feels closer to iOS / Apple spring without
+    actually being a spring (so it works in pure CSS transitions too).
+  */
+  .ease-premium {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /*
+    GPU-promote any element that animates transform/opacity frequently.
+    This kills micro-stutter on cards that lift on hover and on the
+    sticky navbar when it transitions between transparent and glassy.
+  */
+  .gpu {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   @keyframes float-slow {
@@ -362,5 +411,27 @@
   .animate-dash-flow {
     stroke-dasharray: 4 8;
     animation: dash-flow 30s linear infinite;
+  }
+}
+
+/*
+  ────────────────────────────────────────────────────────────────
+  Reduced-motion accessibility.
+  Users who prefer reduced motion get a calm, static experience —
+  no drifting aurora, no spinning counters, no card lift on hover.
+  ────────────────────────────────────────────────────────────────
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .aurora-blob {
+    animation: none !important;
+    transform: none !important;
   }
 }

@@ -22,25 +22,27 @@ type FadeInProps = {
 /**
  * Fade-up wrapper used across every section for consistent, premium motion.
  * Motion is intentionally subtle (small y, short duration) — never flashy.
+ * Triggered slightly before the element is fully in view so the animation
+ * feels like it's "greeting" the user rather than lagging behind their scroll.
  */
 export function FadeIn({
   children,
   className,
   delay = 0,
-  duration = 0.55,
-  y = 18,
+  duration = 0.5,
+  y = 16,
   once = true,
   as = "div",
 }: FadeInProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once, margin: "-80px 0px -80px 0px" });
+  const inView = useInView(ref, { once, margin: "-40px 0px -40px 0px" });
 
   const MotionTag = motion[as] as typeof motion.div;
 
   return (
     <MotionTag
       ref={ref as never}
-      className={cn(className)}
+      className={cn("gpu", className)}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       variants={{

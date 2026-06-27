@@ -81,8 +81,8 @@ function RepoCard({ repo }: { repo: (typeof REPOS)[number] }) {
       rel="noopener noreferrer"
       variants={staggerItem}
       whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 280, damping: 24 }}
-      className="surface-elevated group block p-5"
+      transition={{ type: "spring", stiffness: 320, damping: 26 }}
+      className="surface-elevated gpu group block p-5"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2.5 min-w-0">

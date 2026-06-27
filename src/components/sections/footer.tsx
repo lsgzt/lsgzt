@@ -2,6 +2,7 @@
 
 import { Github, Mail, ArrowUp } from "lucide-react";
 import { NAV_LINKS, SITE, SOCIALS } from "@/lib/content/site";
+import { AuroraBackground } from "@/components/site/aurora-background";
 
 export function Footer() {
   const scrollTo = (id: string) => {
@@ -10,8 +11,11 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative mt-20 border-t border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+    <footer className="relative mt-20 overflow-hidden border-t border-border bg-card/30">
+      {/* Very subtle aurora wash at the bottom of the page */}
+      <AuroraBackground variant="bottom" className="!z-0 opacity-60" />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
           {/* Brand */}
           <div className="md:col-span-5">

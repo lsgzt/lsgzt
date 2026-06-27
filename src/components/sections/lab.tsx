@@ -32,8 +32,8 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
     <motion.article
       variants={staggerItem}
       whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 280, damping: 24 }}
-      className="surface-elevated group relative overflow-hidden p-5 sm:p-6"
+      transition={{ type: "spring", stiffness: 320, damping: 26 }}
+      className="surface-elevated gpu group relative overflow-hidden p-5 sm:p-6"
     >
       {/* Decorative corner glow */}
       <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-violet-500/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />

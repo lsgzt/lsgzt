@@ -30,9 +30,9 @@ function Chip({ skill }: { skill: Skill }) {
       variants={staggerItem}
       whileHover={{ y: -2, scale: 1.04 }}
       whileTap={{ scale: 0.97 }}
-      transition={{ type: "spring", stiffness: 400, damping: 20 }}
+      transition={{ type: "spring", stiffness: 450, damping: 22 }}
       className={cn(
-        "inline-flex items-center gap-2 rounded-full border border-border bg-secondary/40 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-300",
+        "gpu inline-flex items-center gap-2 rounded-full border border-border bg-secondary/40 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-300",
         CATEGORY_TONE[skill.category]
       )}
       type="button"

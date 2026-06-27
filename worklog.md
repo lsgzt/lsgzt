@@ -65,3 +65,40 @@ Stage Summary:
 - All accent colors (status pills, tags, icons, hover states) now use `dark:` variants so they meet WCAG contrast on both white and black backgrounds.
 - Project screenshots and the About portrait are forced to render with a dark UI (since they represent real app UIs / a stylized portrait), which gives a nice premium contrast against the clean white cards in light mode.
 - Lint clean, zero runtime errors, both themes verified end-to-end via VLM.
+
+---
+Task ID: portfolio-lsgz-polish-v2
+Agent: main
+Task: Four polish improvements: (1) add a very-light aurora gradient at the bottom of the page (not just the hero), (2) reduce the purple glow on the "View Projects" button by 30-40%, (3) change the dark-mode aurora color combination to a specific moody spec (top-left soft indigo, top-right tiny purple, bottom-left almost black, bottom-right black, center subtle navy), (4) fix the mobile responsiveness issue where swiping left shifted the whole page despite no content there, (5) optimize smoothness further.
+
+Work Log:
+- Updated `src/app/globals.css` — replaced the dark-mode `--aurora-1..4` variables with the new moody spec: aurora-1 = rgba(99,102,241,0.30) soft indigo (top-left), aurora-2 = rgba(168,85,247,0.18) tiny purple (top-right), aurora-3 = rgba(15,23,42,0.60) subtle navy (center), aurora-4 = rgba(2,2,5,0.85) near-black wash (bottom). Light-mode aurora variables left untouched (still pink/blue/lavender).
+- Rewrote `src/components/site/aurora-background.tsx` — now has 5 positioned blobs matching the user's spec (top-left indigo, top-right tiny purple [smaller + dimmer], center subtle navy, bottom-left near-black, bottom-right deeper black). Added a `variant` prop: "hero" (full intensity, large) for the hero, "bottom" (50% opacity, smaller, positioned to anchor near the top of the footer) for the page-bottom wash. All blobs keep their slow drifting motion on independent 24-34s loops.
+- Reduced the primary button glow in `src/components/site/button.tsx` — ring glow opacity 0.4 → 0.28 (30% reduction) at rest, 0.6 → 0.4 (33%) on hover; drop shadow opacity 0.6 → 0.42 (30%) at rest, 0.8 → 0.55 (31%) on hover; also tightened the blur spread (30px → 22px at rest, 40px → 28px on hover) for a more refined, less diffuse glow. Net effect: ~35% softer purple glow on "View Projects" button.
+- Added bottom aurora to the footer in `src/components/sections/footer.tsx` — imported AuroraBackground, rendered `<AuroraBackground variant="bottom" className="!z-0 opacity-60" />` inside the footer (which is now `overflow-hidden`), and wrapped the footer content in `relative z-10` so it sits above the wash. Result: a very subtle aurora drifts behind the footer, echoing the hero without overpowering it.
+- Fixed the mobile horizontal-overflow / swipe-left issue in `src/app/globals.css` — added `overflow-x: clip` on both `<html>` and `<body>` (with an `@supports not (overflow-x: clip)` fallback to `overflow-x: hidden` for older browsers). `clip` is preferred over `hidden` because it doesn't create a scroll container, so `position: sticky` inside the page (the navbar) keeps working. Verified via `agent-browser eval` that `document.documentElement.scrollWidth === clientWidth` (390 === 390) and `canScrollX === false` — the user can no longer swipe the page sideways on mobile.
+- Smoothness optimizations across the board:
+  - Added a `.gpu` utility class in globals.css: `will-change: transform, opacity; transform: translateZ(0); backface-visibility: hidden;` — promotes elements to their own GPU layer so transform/opacity animations don't trigger layout/paint.
+  - Added `.ease-premium` utility: `transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1)` — the iOS-like ease-out curve.
+  - Applied `.gpu` to: aurora blobs (already had will-change, now also has translateZ + backface-visibility), FadeIn wrapper (every section's content), project cards, experiment cards, repo cards, tech-stack chips, and the navbar.
+  - Added `prefers-reduced-motion` media query in globals.css — users who prefer reduced motion get a calm, static experience (no drifting aurora, no card lift, instant transitions). This is also an accessibility win.
+  - Tightened spring physics on hover-lift cards: stiffness 280 → 320, damping 24 → 26 (snappier, less wobble). Tech-stack chips: stiffness 400 → 450, damping 20 → 22.
+  - FadeIn defaults: duration 0.55s → 0.5s, y-offset 18px → 16px, inView margin "-80px" → "-40px" so animations trigger slightly earlier (feels more responsive, like the content is greeting the user rather than lagging behind scroll).
+  - Navbar transition: duration 300ms → 500ms with `ease-premium` for a smoother glass/transparent shift when scrolling.
+- Ran `bun run lint` — clean (zero warnings, zero errors).
+- Verified all changes via agent-browser + VLM (glm-4.6v):
+  - Dark hero: aurora confirmed moody (soft indigo top-left, tiny purple top-right, dark/black bottom, subtle navy center). VLM described it as "muted, deep indigo, soft purple, faint navy — sophisticated rather than bright or saturated." View Projects button glow confirmed "subtle, not overly bright."
+  - Dark footer: very subtle aurora wash confirmed visible at the bottom, footer content fully readable.
+  - Light hero: aurora still Apple-like (pink/lavender/blue), button glow subtle.
+  - Light footer: subtle aurora wash visible, content readable.
+  - Mobile (390x844): `canScrollX: false` — horizontal swipe fully locked. Layout properly contained, no content cut off, single-column stacking clean.
+  - Contact form + command palette still fully functional after all changes.
+
+Stage Summary:
+- Delivered all 4 requested improvements plus general smoothness optimization:
+  1. Bottom-of-page aurora added (very subtle, in footer, doesn't overpower content)
+  2. View Projects button purple glow reduced ~35% (tighter, more refined)
+  3. Dark-mode aurora recolored to the exact moody spec (indigo / tiny purple / navy / near-black / black)
+  4. Mobile horizontal swipe fully locked via `overflow-x: clip` on html+body (verified `canScrollX === false`)
+  5. Extra smoothness: GPU layer promotion on all animated elements, tighter spring physics, earlier fade-in triggers, premium easing, reduced-motion accessibility support
+- Lint clean, zero runtime errors (only the standard cosmetic next-themes dev-mode hydration warning which is expected and harmless), both themes verified, mobile verified.

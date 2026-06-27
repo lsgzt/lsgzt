@@ -64,7 +64,7 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
     >
       <nav
         className={cn(
-          "mx-auto flex h-14 max-w-6xl items-center justify-between rounded-2xl px-3 transition-all duration-300 sm:px-4",
+          "gpu mx-auto flex h-14 max-w-6xl items-center justify-between rounded-2xl px-3 transition-all duration-500 ease-premium sm:px-4",
           scrolled
             ? "border border-border bg-card/70 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)]"
             : "border border-transparent bg-transparent"
