@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Github, Menu, X, Command } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/content/site";
 import { Button } from "@/components/site/button";
+import { ThemeToggle } from "@/components/site/theme-toggle";
 import { cn } from "@/lib/utils";
 
 type NavbarProps = {
@@ -119,12 +120,14 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
         <div className="flex items-center gap-2">
           <button
             onClick={onOpenCommand}
-            className="hidden h-9 items-center gap-2 rounded-full border border-border bg-secondary/30 px-3 text-xs text-muted-foreground transition-colors hover:border-white/15 hover:text-foreground sm:flex"
+            className="hidden h-9 items-center gap-2 rounded-full border border-border bg-secondary/30 px-3 text-xs text-muted-foreground transition-colors hover:border-foreground/15 hover:text-foreground sm:flex"
             aria-label="Open command palette"
           >
             <Command className="h-3.5 w-3.5" />
             <span className="font-mono">K</span>
           </button>
+
+          <ThemeToggle />
 
           <Button
             asChild
@@ -179,7 +182,7 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
                 href={SITE.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-1 flex items-center gap-2 rounded-xl bg-secondary/60 px-4 py-3 text-sm font-medium text-foreground"
+                className="mt-1 flex items-center gap-2 rounded-xl bg-secondary/60 px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
               >
                 <Github className="h-4 w-4" /> GitHub
               </a>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github, Sparkles } from "lucide-react";
 import { Button } from "@/components/site/button";
 import { AiIllustration } from "@/components/illustrations/ai-illustration";
+import { AuroraBackground } from "@/components/site/aurora-background";
 import { SITE } from "@/lib/content/site";
 
 export function Hero() {
@@ -17,20 +18,22 @@ export function Hero() {
       id="home"
       className="relative overflow-hidden pt-32 pb-20 sm:pt-36 md:pt-40 md:pb-28"
     >
-      {/* Background atmosphere */}
+      {/* Aurora gradient background — soft drifting color blobs */}
+      <AuroraBackground className="!z-0" />
+
+      {/* Subtle grid overlay on top of the aurora */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-grid opacity-60 [mask-image:radial-gradient(ellipse_60%_60%_at_50%_30%,#000_30%,transparent_75%)]" />
-        <div className="absolute left-1/2 top-0 h-[480px] w-[820px] -translate-x-1/2 rounded-full bg-radial-fade blur-3xl" />
       </div>
 
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 sm:px-6 md:grid-cols-12 md:gap-8">
+      <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 sm:px-6 md:grid-cols-12 md:gap-8">
         {/* Left: copy */}
         <div className="md:col-span-7">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/30 px-3 py-1 text-xs text-muted-foreground"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs text-muted-foreground backdrop-blur-sm"
           >
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -114,7 +117,7 @@ export function Hero() {
           <div className="relative mx-auto max-w-md md:max-w-none">
             <div className="gradient-border surface-elevated relative overflow-hidden rounded-3xl p-4">
               <div className="absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-border bg-card/80 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground backdrop-blur-sm">
-                <Sparkles className="h-3 w-3 text-violet-400" />
+                <Sparkles className="h-3 w-3 text-violet-500 dark:text-violet-400" />
                 Neural Constellation
               </div>
               <AiIllustration className="w-full" />
@@ -127,7 +130,7 @@ export function Hero() {
               className="absolute -left-3 top-1/3 hidden rounded-2xl border border-border bg-card/80 px-3 py-2 text-xs text-muted-foreground shadow-xl backdrop-blur-md sm:block"
             >
               <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
+                <span className="h-1.5 w-1.5 rounded-full bg-violet-500 dark:bg-violet-400" />
                 <span className="text-foreground/90">Inference live</span>
               </div>
             </motion.div>
@@ -138,7 +141,7 @@ export function Hero() {
               className="absolute -right-3 bottom-1/4 hidden rounded-2xl border border-border bg-card/80 px-3 py-2 text-xs text-muted-foreground shadow-xl backdrop-blur-md sm:block"
             >
               <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-500 dark:bg-blue-400" />
                 <span className="text-foreground/90">Latency 142ms</span>
               </div>
             </motion.div>

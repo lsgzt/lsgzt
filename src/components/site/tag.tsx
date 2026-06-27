@@ -8,10 +8,12 @@ const tagVariants = cva(
   {
     variants: {
       tone: {
-        default: "hover:border-white/15 hover:text-foreground",
+        default:
+          "hover:border-foreground/15 hover:text-foreground",
         violet:
-          "border-violet-500/20 bg-violet-500/5 text-violet-300 hover:border-violet-500/40 hover:text-violet-200",
-        blue: "border-blue-500/20 bg-blue-500/5 text-blue-300 hover:border-blue-500/40 hover:text-blue-200",
+          "border-violet-500/25 bg-violet-500/10 text-violet-700 dark:text-violet-300 hover:border-violet-500/50 hover:text-violet-800 dark:hover:text-violet-200",
+        blue:
+          "border-blue-500/25 bg-blue-500/10 text-blue-700 dark:text-blue-300 hover:border-blue-500/50 hover:text-blue-800 dark:hover:text-blue-200",
       },
     },
     defaultVariants: { tone: "default" },
@@ -31,13 +33,20 @@ const statusVariants = cva(
   {
     variants: {
       status: {
-        live: "bg-emerald-500/10 text-emerald-300 ring-1 ring-inset ring-emerald-500/20",
-        active: "bg-violet-500/10 text-violet-300 ring-1 ring-inset ring-violet-500/20",
-        beta: "bg-blue-500/10 text-blue-300 ring-1 ring-inset ring-blue-500/20",
-        exploring: "bg-amber-500/10 text-amber-300 ring-1 ring-inset ring-amber-500/20",
-        shipped: "bg-emerald-500/10 text-emerald-300 ring-1 ring-inset ring-emerald-500/20",
-        planned: "bg-zinc-500/10 text-zinc-300 ring-1 ring-inset ring-zinc-500/20",
-        concept: "bg-zinc-500/10 text-zinc-300 ring-1 ring-inset ring-zinc-500/20",
+        live:
+          "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 ring-1 ring-inset ring-emerald-500/25",
+        active:
+          "bg-violet-500/10 text-violet-700 dark:text-violet-300 ring-1 ring-inset ring-violet-500/25",
+        beta:
+          "bg-blue-500/10 text-blue-700 dark:text-blue-300 ring-1 ring-inset ring-blue-500/25",
+        exploring:
+          "bg-amber-500/10 text-amber-700 dark:text-amber-300 ring-1 ring-inset ring-amber-500/30",
+        shipped:
+          "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 ring-1 ring-inset ring-emerald-500/25",
+        planned:
+          "bg-zinc-500/10 text-zinc-600 dark:text-zinc-300 ring-1 ring-inset ring-zinc-500/25",
+        concept:
+          "bg-zinc-500/10 text-zinc-600 dark:text-zinc-300 ring-1 ring-inset ring-zinc-500/25",
       },
     },
   }

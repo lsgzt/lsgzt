@@ -36,7 +36,7 @@ export function Footer() {
                   target={s.href.startsWith("http") ? "_blank" : undefined}
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-secondary/40 text-muted-foreground transition-colors hover:border-white/15 hover:text-foreground"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-secondary/40 text-muted-foreground transition-colors hover:border-foreground/15 hover:text-foreground"
                 >
                   {s.label === "GitHub" ? (
                     <Github className="h-4 w-4" />
@@ -104,7 +104,7 @@ export function Footer() {
             </p>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border bg-secondary/40 px-3 text-xs font-medium text-muted-foreground transition-colors hover:border-white/15 hover:text-foreground"
+              className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border bg-secondary/40 px-3 text-xs font-medium text-muted-foreground transition-colors hover:border-foreground/15 hover:text-foreground"
             >
               Back to top <ArrowUp className="h-3.5 w-3.5" />
             </button>

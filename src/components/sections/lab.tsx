@@ -39,7 +39,7 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
       <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-violet-500/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
       <div className="relative flex items-start justify-between">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-secondary/60 text-violet-300">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-secondary/60 text-violet-600 dark:text-violet-300">
           <Icon className="h-5 w-5" />
         </div>
         <StatusPill status={experiment.status} />
@@ -97,7 +97,7 @@ export function Lab() {
           delay={0.1}
           className="mt-8 flex items-center gap-3 rounded-2xl border border-border bg-secondary/20 p-4 text-sm text-muted-foreground"
         >
-          <FlaskConical className="h-4 w-4 shrink-0 text-violet-400" />
+          <FlaskConical className="h-4 w-4 shrink-0 text-violet-600 dark:text-violet-400" />
           <span>
             Experiments update in real time as I make progress. The ones marked
             <span className="text-foreground"> Shipped</span> usually become featured projects.

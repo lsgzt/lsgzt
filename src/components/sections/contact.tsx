@@ -140,10 +140,10 @@ export function Contact() {
                     href={social.href}
                     target={social.href.startsWith("http") ? "_blank" : undefined}
                     rel="noopener noreferrer"
-                    className="surface-elevated group flex items-center justify-between p-5 transition-colors hover:border-white/15"
+                    className="surface-elevated group flex items-center justify-between p-5 transition-colors hover:border-foreground/15"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-secondary/60 text-muted-foreground transition-colors group-hover:text-violet-300">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-secondary/60 text-muted-foreground transition-colors group-hover:text-violet-600 dark:group-hover:text-violet-300">
                         <Icon className="h-4 w-4" />
                       </div>
                       <div>
@@ -155,13 +155,13 @@ export function Contact() {
                         </div>
                       </div>
                     </div>
-                    <Send className="h-4 w-4 text-muted-foreground/40 transition-all group-hover:text-violet-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    <Send className="h-4 w-4 text-muted-foreground/40 transition-all group-hover:text-violet-600 dark:group-hover:text-violet-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </a>
                 );
               })}
 
               <div className="surface-elevated mt-auto flex items-center gap-3 bg-gradient-to-br from-violet-500/[0.05] to-blue-500/[0.05] p-5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-300">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-300">
                   <span className="relative flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />

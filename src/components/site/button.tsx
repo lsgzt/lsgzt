@@ -16,10 +16,10 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border",
         outline:
-          "border border-border bg-transparent text-foreground hover:bg-secondary/50 hover:border-white/15",
+          "border border-border bg-transparent text-foreground hover:bg-secondary/50 hover:border-foreground/15",
         ghost: "bg-transparent text-foreground hover:bg-secondary/60",
         glass:
-          "border border-white/10 bg-white/[0.03] backdrop-blur-md text-foreground hover:bg-white/[0.06] hover:border-white/20",
+          "border border-foreground/10 bg-foreground/[0.03] backdrop-blur-md text-foreground hover:bg-foreground/[0.06] hover:border-foreground/20",
       },
       size: {
         sm: "h-9 px-4 text-sm",

@@ -176,7 +176,7 @@ export function CommandPalette({
                           onSelect={() => item.action()}
                           className="group flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-foreground data-[selected=true]:bg-secondary/60 data-[selected=true]:text-foreground"
                         >
-                          <item.icon className="h-4 w-4 shrink-0 text-muted-foreground group-data-[selected=true]:text-violet-300" />
+                          <item.icon className="h-4 w-4 shrink-0 text-muted-foreground group-data-[selected=true]:text-violet-600 dark:group-data-[selected=true]:text-violet-300" />
                           <span className="flex-1 truncate">{item.label}</span>
                           {item.hint && (
                             <span className="truncate text-xs text-muted-foreground/60">

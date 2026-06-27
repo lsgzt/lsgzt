@@ -91,7 +91,7 @@ function RepoCard({ repo }: { repo: (typeof REPOS)[number] }) {
             {repo.name}
           </h3>
         </div>
-        <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground/60 transition-all group-hover:text-violet-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground/60 transition-all group-hover:text-violet-600 dark:group-hover:text-violet-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </div>
 
       <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">

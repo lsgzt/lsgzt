@@ -31,13 +31,13 @@ export function ProjectScreenshot({
 
   return (
     <div className={className}>
-      <div className="relative h-full w-full overflow-hidden">
+      <div className="relative h-full w-full overflow-hidden bg-[#0a0a0c]">
         {/* Window chrome */}
-        <div className="absolute inset-x-0 top-0 flex h-7 items-center gap-1.5 border-b border-border bg-card/80 px-3 backdrop-blur-sm">
+        <div className="absolute inset-x-0 top-0 flex h-7 items-center gap-1.5 border-b border-white/10 bg-[#0e0e11]/80 px-3 backdrop-blur-sm">
           <div className="h-2 w-2 rounded-full bg-red-500/60" />
           <div className="h-2 w-2 rounded-full bg-amber-500/60" />
           <div className="h-2 w-2 rounded-full bg-emerald-500/60" />
-          <div className="ml-3 h-3 flex-1 max-w-[40%] rounded-full bg-secondary/60" />
+          <div className="ml-3 h-3 flex-1 max-w-[40%] rounded-full bg-white/10" />
         </div>
 
         {/* Content area */}

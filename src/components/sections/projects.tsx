@@ -23,7 +23,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       )}
     >
       {/* Screenshot */}
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-card">
+      <div className="relative aspect-[16/10] overflow-hidden border-b border-border">
         <ProjectScreenshot project={project} className="h-full w-full" />
 
         {/* Status pill overlay */}
@@ -95,7 +95,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground transition-colors hover:text-violet-300"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground transition-colors hover:text-violet-600 dark:hover:text-violet-300"
               >
                 Live Demo <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
@@ -149,7 +149,7 @@ export function Projects() {
             href="https://github.com/lsgzt"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 items-center gap-2 rounded-full border border-border bg-card px-5 text-sm font-medium text-foreground transition-colors hover:border-white/20 hover:bg-secondary/60"
+            className="inline-flex h-10 items-center gap-2 rounded-full border border-border bg-card px-5 text-sm font-medium text-foreground transition-colors hover:border-foreground/20 hover:bg-secondary/60"
           >
             <Github className="h-4 w-4" /> View all repositories
           </a>

@@ -47,7 +47,7 @@ export function About() {
           {/* Portrait + pillars */}
           <div className="lg:col-span-5">
             <FadeIn className="relative">
-              <div className="surface-elevated relative aspect-[4/5] overflow-hidden">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border bg-[#0a0a0c] shadow-[var(--card-shadow)]">
                 {/* Portrait placeholder — abstract gradient bust, not a real photo */}
                 <div className="absolute inset-0 bg-gradient-to-b from-violet-500/20 via-blue-500/10 to-transparent" />
                 <svg
@@ -58,21 +58,21 @@ export function About() {
                 >
                   <defs>
                     <radialGradient id="about-glow" cx="50%" cy="35%" r="50%">
-                      <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.35" />
+                      <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.4" />
                       <stop offset="100%" stopColor="#7c3aed" stopOpacity="0" />
                     </radialGradient>
                     <linearGradient id="about-bust" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.85" />
-                      <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.4" />
+                      <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.9" />
+                      <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.45" />
                     </linearGradient>
                   </defs>
                   <rect width="200" height="250" fill="url(#about-glow)" />
                   {/* Abstract head + shoulders */}
-                  <circle cx="100" cy="90" r="34" fill="url(#about-bust)" opacity="0.7" />
+                  <circle cx="100" cy="90" r="34" fill="url(#about-bust)" opacity="0.75" />
                   <path
                     d="M 50 250 Q 50 170 100 170 Q 150 170 150 250 Z"
                     fill="url(#about-bust)"
-                    opacity="0.6"
+                    opacity="0.65"
                   />
                   {/* Soft noise dots */}
                   {Array.from({ length: 24 }).map((_, i) => (
@@ -80,7 +80,7 @@ export function About() {
                       key={i}
                       cx={(i * 37) % 200}
                       cy={(i * 53) % 250}
-                      r={Math.random() * 0.8 + 0.2}
+                      r={((i * 7) % 6) / 10 + 0.2}
                       fill="#ffffff"
                       opacity={0.2}
                     />
@@ -88,12 +88,12 @@ export function About() {
                 </svg>
 
                 {/* Overlay label */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-xl border border-border bg-card/70 px-4 py-3 backdrop-blur-md">
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-xl border border-white/10 bg-black/40 px-4 py-3 backdrop-blur-md">
                   <div>
-                    <div className="text-sm font-semibold text-foreground">Lovepreet Singh</div>
-                    <div className="text-xs text-muted-foreground">AI Product Builder · LSGZ</div>
+                    <div className="text-sm font-semibold text-white">Lovepreet Singh</div>
+                    <div className="text-xs text-white/60">AI Product Builder · LSGZ</div>
                   </div>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs text-emerald-300 ring-1 ring-inset ring-emerald-500/20">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-2.5 py-1 text-xs text-emerald-300 ring-1 ring-inset ring-emerald-500/30">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Available
                   </span>
                 </div>
@@ -107,9 +107,9 @@ export function About() {
               {PILLARS.map((p) => (
                 <div
                   key={p.title}
-                  className="surface-elevated group p-5 transition-colors hover:border-white/15"
+                  className="surface-elevated group p-5 transition-all hover:border-foreground/15 hover:shadow-[var(--card-shadow-hover)]"
                 >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-secondary/60 text-violet-300">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-secondary/60 text-violet-600 dark:text-violet-300">
                     <p.icon className="h-4 w-4" />
                   </div>
                   <h3 className="mt-3 text-sm font-semibold text-foreground">
@@ -153,7 +153,7 @@ export function About() {
                       </span>
 
                       <div className="flex items-baseline gap-3">
-                        <span className="font-mono text-xs text-violet-300">
+                        <span className="font-mono text-xs text-violet-600 dark:text-violet-300">
                           {item.year}
                         </span>
                         <h4 className="text-sm font-semibold text-foreground">
