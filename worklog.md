@@ -134,3 +134,29 @@ Stage Summary:
   3. Navigation bar completely redesigned — replaced the floating capsule with a clean full-width Linear/Apple-style header (transparent at top, hairline + blur on scroll, centered links with animated underline for active section, minimal square icons on right). No longer feels AI-generated.
   4. Animated curvy L added — hand-drawn cursive L that draws itself in ~1s, tail extends across the page, dissolves into the aurora over ~1.5s, then stays as a very faint (8% opacity) background element. Theme-aware gradient stroke (foreground → violet → blue).
 - Lint clean, zero runtime errors, both themes verified, mobile verified, L animation verified in all 3 phases (drawing, dissolving, settled).
+
+---
+Task ID: portfolio-lsgz-curvy-l-redesign
+Agent: main
+Task: The previous curvy L looked bad. User provided a new reference image showing an elegant calligraphic cursive L with: a pronounced loop at the bottom-left, a tall vertical stem with subtle inward curve, a long sweeping tail extending across the page with a gentle downward arc, purple-to-teal gradient stroke, and a soft neon glow.
+
+Work Log:
+- Analyzed the new reference image via VLM (glm-4.6v) — extracted the exact shape spec: single continuous stroke, small clockwise loop at bottom, tall vertical stem (~250px) with concave-left inward curve, long horizontal tail (~400px+) that curves gently downward as it extends, purple (#a855f7) → teal (#14b8a6) gradient, ~0.8 opacity with ~5px glow blur, variable thickness (thicker at loop/stem, thinner at tail).
+- Rewrote `src/components/illustrations/curvy-l.tsx` with a new hand-tuned SVG path in a 1200×500 viewBox (preserveAspectRatio="none" so the tail stretches to any page width):
+  - Loop: starts at (72, 445), draws a pronounced clockwise circular loop via 3 cubic bezier segments — bigger and more circular than the previous version's subtle loop
+  - Stem: emerges from the loop and rises upward to (100, 108) with 3 cubic bezier segments that give it a subtle inward (concave-left) curve, mimicking a calligraphic pen stroke
+  - Tail: sweeps rightward from the stem peak through 4 cubic bezier segments, curving gently downward (y goes 108 → 158) as it extends all the way to x=1190 (right edge of viewBox)
+- Updated the stroke style:
+  - Gradient: `linearGradient` from #a855f7 (purple, bottom-left) → #8b5cf6 → #6366f1 → #14b8a6 (teal, right) → #14b8a6 at 60% opacity (tail fades). Gradient direction is x1=0% y1=100% x2=100% y2=0% so it flows from bottom-left to top-right along the stroke.
+  - StrokeWidth: 2.4 (slightly thicker than before for presence)
+  - Glow filter: dual drop-shadow during draw phase — `drop-shadow(0 0 6px rgba(168,85,247,0.5)) drop-shadow(0 0 12px rgba(20,184,166,0.25))` — purple core glow + teal outer halo. Switches to `blur(0.5px)` when settled for a soft faded look.
+- Kept the 3-phase animation timeline: Phase 1 "drawing" (0–1.1s, pathLength 0→1 with ease [0.65, 0, 0.35, 1]), Phase 2 "dissolving" (1.1–2.6s, opacity 0.95→0.08), Phase 3 "settled" (2.6s+, 8% opacity). State machine driven by useEffect + setTimeout, deterministic.
+- Ran `bun run lint` — clean (zero warnings, zero errors).
+- Verified via VLM (glm-4.6v) in all phases and both themes:
+  - Dark mode drawing phase: VLM confirmed "distinct loop at the bottom-left, vertical stem rising from the loop, long flowing tail extending across to the right, smooth purple-to-teal gradient, soft glow... sophisticated and modern aesthetic."
+  - Light mode settled phase: VLM confirmed "faint curvy L remains visible... subtle and not distracting... low opacity and soft, blended color... no contrast issues."
+  - All 6 criteria from the reference met: pronounced loop ✓, vertical stem ✓, long tail across page ✓, purple-to-teal gradient ✓, soft glow ✓, elegant calligraphic feel ✓.
+- Zero runtime errors.
+
+Stage Summary:
+- Redesigned the curvy L to match the user's reference image: pronounced loop at bottom-left, tall vertical stem with inward curve, long sweeping tail across the page, purple-to-teal gradient, soft neon glow. Animation preserved (1s draw → 1.5s dissolve → stays at 8% opacity). Verified elegant in both light and dark modes.
