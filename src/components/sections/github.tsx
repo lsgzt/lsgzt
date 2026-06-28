@@ -44,7 +44,13 @@ function ContributionGraph() {
   ];
 
   return (
-    <div className="overflow-x-auto">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="overflow-x-auto"
+    >
       <div
         className="grid gap-[3px]"
         style={{
@@ -55,21 +61,16 @@ function ContributionGraph() {
         }}
       >
         {cells.map((level, i) => (
-          <motion.div
+          // Plain div — no per-cell motion. 364 motion.divs would cause
+          // layout thrash and jank on low-end devices; one parent fade-in
+          // achieves the same reveal at a fraction of the cost.
+          <div
             key={i}
-            initial={{ opacity: 0, scale: 0.4 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{
-              duration: 0.25,
-              delay: (i / cells.length) * 0.6,
-              ease: "easeOut",
-            }}
             className={cn("h-2.5 w-2.5 rounded-[2px]", LEVELS[level])}
           />
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -82,7 +83,7 @@ function RepoCard({ repo }: { repo: (typeof REPOS)[number] }) {
       variants={staggerItem}
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 320, damping: 26 }}
-      className="surface-elevated gpu group block p-5"
+      className="surface-elevated group block p-5"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2.5 min-w-0">

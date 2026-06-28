@@ -36,7 +36,7 @@ export function AuroraBackground({
 
   return (
     <div className={cn("aurora", className)} aria-hidden="true">
-      {/* Top-left — soft indigo glow */}
+      {/* Top-left — soft indigo glow (largest, anchors the hero) */}
       <motion.div
         className="aurora-blob"
         style={{
@@ -48,12 +48,11 @@ export function AuroraBackground({
           opacity: opacityScale,
         }}
         animate={{
-          x: [0, 60, 0],
-          y: [0, 40, 0],
-          scale: [1, 1.12, 1],
+          x: [0, 40, 0],
+          y: [0, 30, 0],
         }}
         transition={{
-          duration: 24,
+          duration: 26,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -71,88 +70,37 @@ export function AuroraBackground({
           opacity: opacityScale * 0.85,
         }}
         animate={{
-          x: [0, -40, 0],
-          y: [0, 50, 0],
-          scale: [1.1, 1, 1.1],
+          x: [0, -30, 0],
+          y: [0, 35, 0],
         }}
         transition={{
-          duration: 28,
+          duration: 30,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 1,
         }}
       />
 
-      {/* Center — very subtle navy */}
+      {/* Center/bottom — subtle navy + near-black wash (single combined blob) */}
       <motion.div
         className="aurora-blob"
         style={{
-          width: sizeBase * 0.7,
-          height: sizeBase * 0.7,
-          top: variant === "hero" ? "5%" : "20%",
-          left: "50%",
-          translateX: "-50%",
+          width: sizeBase * 0.85,
+          height: sizeBase * 0.85,
+          bottom: variant === "hero" ? "-30%" : "-45%",
+          left: "30%",
           background: "var(--aurora-3)",
           opacity: opacityScale * 0.7,
         }}
         animate={{
-          x: ["-50%", "-42%", "-55%", "-50%"],
-          y: [0, 30, 10, 0],
-          scale: [1, 1.15, 0.95, 1],
+          x: [0, 25, -15, 0],
+          y: [0, -15, 10, 0],
         }}
         transition={{
           duration: 32,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 0.5,
-        }}
-      />
-
-      {/* Bottom-left — almost black wash */}
-      <motion.div
-        className="aurora-blob"
-        style={{
-          width: sizeBase * 0.9,
-          height: sizeBase * 0.9,
-          bottom: variant === "hero" ? "-25%" : "-40%",
-          left: "10%",
-          background: "var(--aurora-4)",
-          opacity: opacityScale * 0.8,
-        }}
-        animate={{
-          x: [0, 40, -20, 0],
-          y: [0, -20, 10, 0],
-          scale: [1, 1.1, 0.95, 1],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-      />
-
-      {/* Bottom-right — black, deeper */}
-      <motion.div
-        className="aurora-blob"
-        style={{
-          width: sizeBase * 0.8,
-          height: sizeBase * 0.8,
-          bottom: variant === "hero" ? "-30%" : "-45%",
-          right: "5%",
-          background: "var(--aurora-4)",
-          opacity: opacityScale * 0.9,
-        }}
-        animate={{
-          x: [0, -30, 20, 0],
-          y: [0, -10, 15, 0],
-          scale: [1, 1.08, 0.96, 1],
-        }}
-        transition={{
-          duration: 34,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1.5,
         }}
       />
     </div>

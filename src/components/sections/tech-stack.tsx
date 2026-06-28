@@ -32,7 +32,7 @@ function Chip({ skill }: { skill: Skill }) {
       whileTap={{ scale: 0.97 }}
       transition={{ type: "spring", stiffness: 450, damping: 22 }}
       className={cn(
-        "gpu inline-flex items-center gap-2 rounded-full border border-border bg-secondary/40 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-300",
+        "inline-flex items-center gap-2 rounded-full border border-border bg-secondary/40 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-300",
         CATEGORY_TONE[skill.category]
       )}
       type="button"

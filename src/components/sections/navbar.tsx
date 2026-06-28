@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Menu, X, Command } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/content/site";
-import { Button } from "@/components/site/button";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import { cn } from "@/lib/utils";
 
@@ -18,7 +17,7 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
   const [activeSection, setActiveSection] = useState<string>("home");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -57,37 +56,34 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
 
   return (
     <motion.header
-      initial={{ y: -24, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
+        scrolled
+          ? "border-b border-border bg-background/80 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      )}
     >
-      <nav
-        className={cn(
-          "gpu mx-auto flex h-14 max-w-6xl items-center justify-between rounded-2xl px-3 transition-all duration-500 ease-premium sm:px-4",
-          scrolled
-            ? "border border-border bg-card/70 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)]"
-            : "border border-transparent bg-transparent"
-        )}
-      >
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Logo */}
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, "#home")}
-          className="group flex items-center gap-2.5 pl-1"
+          className="group flex items-center gap-2.5"
           aria-label="LSGZ home"
         >
-          <span className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 text-sm font-bold text-white shadow-[0_4px_14px_-2px_rgba(124,58,237,0.6)]">
+          <span className="relative flex h-7 w-7 items-center justify-center rounded-md bg-foreground text-sm font-bold text-background">
             L
-            <span className="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/20" />
           </span>
-          <span className="text-sm font-semibold tracking-tight">
+          <span className="text-sm font-semibold tracking-tight text-foreground">
             {SITE.alias}
           </span>
         </a>
 
-        {/* Desktop nav */}
-        <div className="hidden items-center gap-1 md:flex">
+        {/* Desktop nav — centered */}
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex">
           {NAV_LINKS.map((link) => {
             const id = link.href.replace("#", "");
             const isActive = activeSection === id;
@@ -97,58 +93,51 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={cn(
-                  "relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
+                  "relative rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
                   isActive
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
+                {link.label}
                 {isActive && (
                   <motion.span
-                    layoutId="nav-pill"
-                    className="absolute inset-0 rounded-full bg-secondary/80"
+                    layoutId="nav-underline"
+                    className="absolute inset-x-2 -bottom-px h-px bg-foreground"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-                <span className="relative z-10">{link.label}</span>
               </a>
             );
           })}
         </div>
 
         {/* Right side */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={onOpenCommand}
-            className="hidden h-9 items-center gap-2 rounded-full border border-border bg-secondary/30 px-3 text-xs text-muted-foreground transition-colors hover:border-foreground/15 hover:text-foreground sm:flex"
+            className="hidden h-8 items-center gap-1.5 rounded-md border border-border bg-secondary/40 px-2.5 text-xs text-muted-foreground transition-colors hover:border-foreground/15 hover:text-foreground sm:flex"
             aria-label="Open command palette"
           >
-            <Command className="h-3.5 w-3.5" />
-            <span className="font-mono">K</span>
+            <Command className="h-3 w-3" />
+            <span className="font-mono text-[10px]">K</span>
           </button>
 
           <ThemeToggle />
 
-          <Button
-            asChild
-            variant="glass"
-            size="sm"
-            className="hidden sm:inline-flex"
+          <a
+            href={SITE.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary/60 hover:text-foreground"
           >
-            <a
-              href={SITE.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub profile"
-            >
-              <Github className="h-4 w-4" />
-              <span>GitHub</span>
-            </a>
-          </Button>
+            <Github className="h-4 w-4" />
+          </a>
 
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-secondary/40 text-foreground md:hidden"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary/60 hover:text-foreground md:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
@@ -157,35 +146,27 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
         </div>
       </nav>
 
-      {/* Mobile sheet */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="mx-auto mt-2 max-w-6xl overflow-hidden rounded-2xl border border-border bg-card/95 backdrop-blur-xl md:hidden"
+            className="overflow-hidden border-b border-border bg-background/95 backdrop-blur-md md:hidden"
           >
-            <div className="flex flex-col p-2">
+            <div className="flex flex-col px-4 py-3 sm:px-6">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/60 hover:text-foreground"
+                  className="rounded-md px-2 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/60 hover:text-foreground"
                 >
                   {link.label}
                 </a>
               ))}
-              <a
-                href={SITE.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-1 flex items-center gap-2 rounded-xl bg-secondary/60 px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
-              >
-                <Github className="h-4 w-4" /> GitHub
-              </a>
             </div>
           </motion.div>
         )}

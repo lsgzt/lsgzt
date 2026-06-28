@@ -42,7 +42,7 @@ export function FadeIn({
   return (
     <MotionTag
       ref={ref as never}
-      className={cn("gpu", className)}
+      className={cn(className)}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       variants={{
