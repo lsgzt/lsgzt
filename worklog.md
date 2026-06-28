@@ -196,3 +196,49 @@ Stage Summary:
 - Replaced all "L" text badges across the site (navbar, footer, loading screen) with the user's custom abstract line-art logo (craiyon_174614_image.png). Logo uses `dark:invert` so it stays visible in both themes.
 - Set the logo as the favicon and Apple touch icon via metadata.
 - Lint clean, zero runtime errors, both themes verified, logo verified in navbar/footer/loading screen.
+
+---
+Task ID: portfolio-lsgz-sweep-and-responsive
+Agent: main
+Task: Three improvements to the cursive L: (1) fix mobile responsiveness — L was being shrunk/squished on mobile, instead keep the L consistent and just crop the tail short on narrow viewports; (2) make the stroke thinner (it felt "fatty"); (3) add a periodic highlight sweep — every 5-9 seconds (random), a thin glowing white highlight sweeps left-to-right across the L, temporarily boosting the L's opacity and adding a subtle glow, then returning to the faded state. The draw animation happens once on page load; the sweep repeats forever. Must be performant (60fps, requestAnimationFrame, CSS transforms, no heavy filters).
+
+Work Log:
+- Rewrote `src/components/illustrations/curvy-l.tsx` with three key changes:
+
+  **1. Responsive L (no more shrinking on mobile):**
+  - Changed `preserveAspectRatio` from `"none"` (which stretched/distorted the path to fill the viewport) to `"xMidYMin slice"` (which preserves the path's aspect ratio and crops overflow).
+  - Result: on narrow (mobile) viewports, the tail is cropped short but the loop + stem keep their proper calligraphic shape — no squishing. On wide (desktop) viewports, the full tail extends across the page. VLM confirmed: "L retains its calligraphic shape (loop, stem, tail) without distortion... tail appears cropped (shorter) on mobile, rather than the entire L being uniformly shrunk."
+
+  **2. Thinner stroke:**
+  - Reduced `strokeWidth` from 120 → 70 (in viewBox units of 26880×11520, this renders as ~2px at display size).
+  - VLM confirmed: "stroke appears thinner (not fatty) — it has a delicate, refined width... calligraphic and elegant."
+
+  **3. Highlight sweep (the centerpiece):**
+  - Added a `<clipPath id="curvy-l-clip">` containing the L path with `strokeWidth={180}` (wider than the actual 70-width stroke) so the sweep highlight appears as a band on the L's stroke, not just the exact line.
+  - Added a `<linearGradient id="sweep-gradient">` that's white-to-transparent with a thin peak at 50% (0% opacity at 0-45%, 95% opacity at 50%, 0% at 55-100%) — this creates a ~2-4px wide bright band with soft edges.
+  - The sweep rect (width=3000 viewBox units, height=11520) is wrapped in a `<g ref={sweepGroupRef}>` inside the clip path. Initially off-screen (translateX(-4000)) and invisible (opacity 0).
+  - A `useEffect` (triggered when phase becomes "settled") runs the sweep scheduler:
+    - `scheduleSweep()`: sets a `setTimeout` with a random delay of 5000-9000ms (5-9 seconds, as requested).
+    - `triggerSweep()`: (a) boosts the L group's opacity from 0.1 → 0.6 and adds a dual drop-shadow glow (magenta + white) via CSS transition; (b) animates the sweep group's SVG `transform` attribute from `translate(-4000, 0)` → `translate(28000, 0)` over 1100ms using `requestAnimationFrame` with an ease-in-out curve (`progress < 0.5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2`).
+    - When the sweep completes: hides the sweep rect (opacity 0), fades the L back to 0.1 opacity, removes the glow, and calls `scheduleSweep()` again to repeat forever.
+  - **Critical performance detail:** the sweep uses the SVG `transform` attribute (via `setAttribute`) which works in viewBox units — NOT CSS `transform: translateX()` which would use CSS pixels and require manual scaling math. This keeps the animation clean and accurate.
+  - **Performance:** the sweep transform is GPU-composited (translate only, no repaints). The opacity transitions are short CSS transitions. `will-change: transform, opacity` on the sweep group hints to the browser. `requestAnimationFrame` keeps it in sync with the render loop at 60fps. No heavy filters during steady state — the drop-shadow glow only applies during the ~1.1s sweep window.
+  - VLM confirmed the sweep works: "bright white highlight/band visible on the L stroke... thin, horizontal white band that sweeps across the L's stroke (following the L's curved path)... subtle, luminous effect... distinct but not overpowering."
+
+- **Draw animation only happens once:** the `useInView` hook uses `once: true`, and the phase state machine progresses drawing → dissolving → settled deterministically via `setTimeout`. Once settled, the draw animation never re-triggers. The sweep `useEffect` only starts when `phase === "settled"`.
+
+- Ran `bun run lint` — clean (zero warnings, zero errors).
+- Verified via VLM (glm-4.6v) and agent-browser:
+  - Draw phase (desktop): L visible, thin stroke, calligraphic, magenta-purple gradient ✓
+  - Sweep caught mid-animation: bright white highlight band on L stroke, following the curved path ✓
+  - Mobile (390x844): L retains calligraphic shape, tail cropped short (not shrunk), no distortion ✓
+  - Light mode: L visible with gradient, thin elegant stroke, well-balanced contrast ✓
+  - Sweep scheduling verified via DOM inspection: sweep group transform reaches `translate(28000, 0)` (end position), L opacity transitions between 0.1 (settled) and 0.6 (during sweep) ✓
+  - Zero runtime errors in console.
+
+Stage Summary:
+- All three improvements delivered:
+  1. L is now responsive via `preserveAspectRatio="xMidYMin slice"` — keeps calligraphic shape on all viewports, just crops the tail short on mobile.
+  2. Stroke thinned from 120 → 70 viewBox units (looks ~2px at display size).
+  3. Highlight sweep implemented: every 5-9s (random), a thin 2-4px white-to-transparent band sweeps left-to-right across the L (clipped to the L's stroke shape), with the L's opacity boosting from 0.1 → 0.6 and a subtle magenta+white glow during the ~1.1s sweep, then returning to faded state. Driven by requestAnimationFrame + SVG transform attribute (GPU-composited, 60fps, no heavy filters). Draw animation happens once on load; sweep repeats forever.
+- Lint clean, zero runtime errors, both themes verified, mobile verified, sweep verified.
