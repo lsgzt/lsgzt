@@ -242,3 +242,40 @@ Stage Summary:
   2. Stroke thinned from 120 → 70 viewBox units (looks ~2px at display size).
   3. Highlight sweep implemented: every 5-9s (random), a thin 2-4px white-to-transparent band sweeps left-to-right across the L (clipped to the L's stroke shape), with the L's opacity boosting from 0.1 → 0.6 and a subtle magenta+white glow during the ~1.1s sweep, then returning to faded state. Driven by requestAnimationFrame + SVG transform attribute (GPU-composited, 60fps, no heavy filters). Draw animation happens once on load; sweep repeats forever.
 - Lint clean, zero runtime errors, both themes verified, mobile verified, sweep verified.
+
+---
+Task ID: portfolio-lsgz-l-fix-and-progressive-sweep
+Agent: main
+Task: User reported three problems with the cursive L: (1) "double tail" / "double L" — the path had multiple sub-paths causing a doubled appearance; (2) the L was "literally not visible" on both mobile and desktop — only the tail was showing because the viewBox was too wide and `preserveAspectRatio="slice"` was cropping the loop+stem; (3) the sweep should be a PROGRESSIVE BRIGHTEN that travels along the path, not a separate white band — like `-===, =-==, ==-=, ===-` where left of sweep = bright, right of sweep = faded, and the sweep covers the whole L.
+
+Work Log:
+- Analyzed the SVG path structure: discovered it contained 3 sub-paths (separated by 'z m...'). The main L was the first sub-path (1729 chars); the other 2 were small decorative loops that caused the "double" appearance. Computed the main L's bounding box: x=[-4206, 6400], y=[-1090, 8320], aspect ratio ~1.13 (nearly square).
+- Identified the orientation problem: the original path (after y-flip only) had the loop/stem on the RIGHT (x≈6400) and the tail extending LEFT (x≈-4206). The user's reference shows loop on LEFT, tail extending RIGHT. Computed a new transform `translate(6400, 8320) scale(-1, -1)` that flips BOTH axes — loop ends up on the left (x=0), tail extends right (x=10606).
+- Rewrote `src/components/illustrations/curvy-l.tsx`:
+  - Used ONLY the main sub-path (stripped the 2 extra decorative loops that caused the "double L" look)
+  - Changed the transform from `translate(0, 11520) scale(1, -1)` (y-flip only, loop on right) to `translate(6400, 8320) scale(-1, -1)` (flip both axes, loop on left, tail extends right)
+  - Changed the viewBox from the oversized `0 0 26880 11520` to a tight `-200 -200 11006 9810` that fits the entire L with 200px padding
+  - Changed `preserveAspectRatio` from `"xMidYMin slice"` (which was cropping the loop+stem on most viewports) to `"xMidYMid meet"` (which ensures the ENTIRE L is always visible — scales to fit, no cropping, no distortion)
+  - This fixes both the "not visible" issue AND the mobile responsiveness — the L now displays completely on every viewport size
+- Redesigned the sweep as a PROGRESSIVE BRIGHTEN (not a separate white band):
+  - The L path is now rendered TWICE:
+    (a) a **faded base layer** (always at ~12% opacity) — this is the "faded L" that's always visible
+    (b) a **bright layer** (full opacity + glow during sweep, 0 opacity otherwise), clipped to a `<rect>` whose `width` is animated from 0 → full
+  - As the sweep progresses, the clip rect's width grows left-to-right, revealing more of the bright layer. So: left of sweep position = bright (bright layer visible on top), right of sweep position = faded (only base layer shows through). This matches the user's `-===, =-==, ==-=, ===-` pattern.
+  - When the sweep reaches the right edge, the whole L is bright (`====`), holds for 400ms, then the bright layer fades out (0.8s) to return to the fully faded state. Then the next sweep is scheduled.
+  - **Critical fix:** the clipPath is now applied to a wrapper group OUTSIDE the transform group, so the clip rect coordinates are in VIEWER space (not the flipped path space). This ensures the sweep goes left-to-right as the viewer sees it, regardless of the path's internal coordinate flips.
+- Kept the random 5-9s sweep interval, requestAnimationFrame-driven animation, ease-in-out curve, and the 1.5s sweep duration. The draw animation still happens once on page load (useInView with once:true, phase state machine).
+- Ran `bun run lint` — clean (zero warnings, zero errors).
+- Verified via VLM (glm-4.6v):
+  - Drawing phase (desktop): "single L (not doubled)... full L visible (loop + stem + tail)... loop on LEFT, tail extending RIGHT... soft purple stroke... spans the hero background, loop in upper-left, tail curving toward center-right" ✓
+  - Progressive sweep caught mid-animation: "left portion of the L is bright... right of the sweep is faded... progressive gradient where visibility and intensity decrease from left to right... follows the sweep position" ✓ — exactly matches the `-===, =-==` pattern
+  - Mobile (390x844): "full cursive L (loop, stem, tail) intact — no parts cut off or squished... appropriately sized for mobile... does not overflow" ✓
+  - Light mode: "single L, loop on left, tail extending right... no contrast issues on white" ✓
+  - Zero runtime errors.
+
+Stage Summary:
+- Fixed all three problems:
+  1. No more "double L" — stripped the 2 extra sub-paths, now renders a single clean L stroke.
+  2. L is now fully visible on all viewports — tight viewBox + `preserveAspectRatio="xMidYMid meet"` ensures the entire L (loop + stem + tail) always displays. Corrected the orientation so loop is on the LEFT and tail extends RIGHT (matching the user's reference).
+  3. Sweep is now a PROGRESSIVE BRIGHTEN that travels along the path — left of sweep = bright, right of sweep = faded, exactly like `-===, =-==, ==-=, ===-`. Implemented via two stacked path layers (faded base + bright clipped overlay) where the clip rect grows from 0 → full width via requestAnimationFrame.
+- Lint clean, zero runtime errors, both themes verified, mobile verified, progressive sweep verified.
