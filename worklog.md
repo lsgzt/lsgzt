@@ -160,3 +160,39 @@ Work Log:
 
 Stage Summary:
 - Redesigned the curvy L to match the user's reference image: pronounced loop at bottom-left, tall vertical stem with inward curve, long sweeping tail across the page, purple-to-teal gradient, soft neon glow. Animation preserved (1s draw → 1.5s dissolve → stays at 8% opacity). Verified elegant in both light and dark modes.
+
+---
+Task ID: portfolio-lsgz-exact-svg-and-logo
+Agent: main
+Task: User said the previous L was still bad. They provided the exact SVG path of the cursive L (in line_artwork.html) and a custom logo image (craiyon_174614_image.png) to use as the brand logo.
+
+Work Log:
+- Read the user's `line_artwork.html` — extracted the exact SVG path data, the viewBox (0 0 26880 11520), the y-flip transform (`translate(0, 11520) scale(1, -1)`), and the gradient (#d400ff → #ba00ff → #7a00ff, magenta-purple). The path is a beautiful calligraphic L with a loop at the bottom, a tall stem, and a long sweeping tail that extends across the full viewBox width.
+- Analyzed the logo image via VLM (glm-4.6v) — confirmed it's a minimalist abstract mark: two curved black lines forming a teardrop shape with an internal S-curve, solid black on white/transparent, no text. 1037×1024 RGBA PNG.
+- Copied the logo to `/home/z/my-project/public/logo.png` so it can be served as a static asset.
+- Rewrote `src/components/illustrations/curvy-l.tsx` to use the EXACT SVG path from line_artwork.html:
+  - Preserved the original viewBox (0 0 26880 11520) and the y-flip transform group (`transform="translate(0, 11520) scale(1, -1)"`)
+  - Preserved the exact gradient: #d400ff (0%) → #ba00ff (50%) → #7a00ff (100%)
+  - Rendered the path as a stroke (not fill) with strokeWidth=120, round linecap/linejoin so the pathLength animation can draw it. The strokeWidth is proportional to the large viewBox so it appears as a ~2-3px stroke at display size.
+  - Kept the glow filter from the original: `drop-shadow(0 0 10px rgba(186, 0, 255, 0.5))` during draw, `blur(0.5px)` when settled
+  - Used `preserveAspectRatio="none"` so the tail stretches across any page width
+  - Kept the 3-phase animation: drawing (0–1.1s, pathLength 0→1) → dissolving (1.1–2.6s, opacity 0.9→0.08) → settled (2.6s+, 8% opacity)
+- Updated `src/components/sections/navbar.tsx` — replaced the "L" text badge with the new logo image (`<img src="/logo.png" className="h-7 w-7 object-contain dark:invert" />`). The logo is black-on-white, so `dark:invert` flips it to white-on-black in dark mode for visibility.
+- Updated `src/components/sections/footer.tsx` — same logo replacement (h-8 w-8) next to the LSGZ text in the brand block. Removed the old violet-blue gradient badge.
+- Updated `src/components/site/loading-screen.tsx` — replaced the gradient "L" badge with the new logo image, wrapped in a pulsing ring animation. The logo scales gently (1 → 0.9 → 1) during loading.
+- Updated `src/app/layout.tsx` — added `icons: { icon: "/logo.png", apple: "/logo.png" }` to the metadata so the logo becomes the favicon and Apple touch icon.
+- Ran `bun run lint` — clean (zero warnings, zero errors).
+- Verified via VLM (glm-4.6v) in both themes:
+  - Dark mode L drawing: VLM confirmed "calligraphic L with a distinct loop (the upper curl), a stem (the vertical portion), and a long, flowing tail that curves horizontally across the screen... magenta-purple gradient... subtle glow."
+  - Dark mode logo in navbar: VLM confirmed "abstract line-art mark: two curved lines forming a teardrop/loop shape... not a literal letter... looks good in the navbar."
+  - Light mode L: VLM confirmed "cursive L visible... magenta-purple gradient and glow."
+  - Light mode logo: VLM confirmed "abstract line-art logo visible and dark (not inverted) on white."
+  - Footer logo: VLM confirmed "custom abstract line-art logo visible in the footer, positioned to the left of the 'LSGZ' text... complements the footer's design well."
+  - Loading screen: VLM confirmed "abstract line-art logo visible in the center... pulsing ring around it... clean."
+- Zero runtime errors in console.
+
+Stage Summary:
+- Replaced the previous L with the user's EXACT SVG path from line_artwork.html — beautiful calligraphic L with loop, stem, and long sweeping tail, magenta-purple gradient (#d400ff → #ba00ff → #7a00ff) and soft glow. The draw animation (1s draw → 1.5s dissolve → 8% settled) is preserved.
+- Replaced all "L" text badges across the site (navbar, footer, loading screen) with the user's custom abstract line-art logo (craiyon_174614_image.png). Logo uses `dark:invert` so it stays visible in both themes.
+- Set the logo as the favicon and Apple touch icon via metadata.
+- Lint clean, zero runtime errors, both themes verified, logo verified in navbar/footer/loading screen.

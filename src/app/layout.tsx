@@ -36,6 +36,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Lovepreet Singh" }],
   creator: "Lovepreet Singh",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
     title: "Lovepreet Singh — Building AI products that people actually use",
     description:

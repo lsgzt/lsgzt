@@ -25,21 +25,10 @@ export function LoadingScreen() {
           className="fixed inset-0 z-[200] flex items-center justify-center bg-background"
         >
           <div className="flex flex-col items-center gap-6">
-            <div className="relative flex h-12 w-12 items-center justify-center">
+            <div className="relative flex h-14 w-14 items-center justify-center">
+              {/* Pulsing ring around the logo */}
               <motion.span
-                className="absolute inset-0 rounded-xl bg-gradient-to-br from-violet-500 to-blue-500"
-                animate={{
-                  scale: [1, 0.85, 1],
-                  rotate: [0, 90, 0],
-                }}
-                transition={{
-                  duration: 1.4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-              <motion.span
-                className="absolute inset-0 rounded-xl border border-violet-400/40"
+                className="absolute inset-0 rounded-full border border-violet-400/40"
                 animate={{
                   scale: [1, 1.3, 1],
                   opacity: [0.6, 0, 0.6],
@@ -50,7 +39,22 @@ export function LoadingScreen() {
                   ease: "easeInOut",
                 }}
               />
-              <span className="relative z-10 text-base font-bold text-white">L</span>
+              {/* The custom logo */}
+              <motion.img
+                src="/logo.png"
+                alt="LSGZ"
+                width={40}
+                height={40}
+                className="relative z-10 h-10 w-10 object-contain dark:invert"
+                animate={{
+                  scale: [1, 0.9, 1],
+                }}
+                transition={{
+                  duration: 1.4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
             </div>
 
             <motion.div

@@ -20,10 +20,13 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-5">
             <div className="flex items-center gap-2.5">
-              <span className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 text-sm font-bold text-white">
-                L
-                <span className="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/20" />
-              </span>
+              <img
+                src="/logo.png"
+                alt="LSGZ logo"
+                width={32}
+                height={32}
+                className="h-8 w-8 object-contain dark:invert"
+              />
               <span className="text-sm font-semibold tracking-tight">
                 {SITE.alias}
               </span>

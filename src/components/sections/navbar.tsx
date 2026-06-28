@@ -74,9 +74,16 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
           className="group flex items-center gap-2.5"
           aria-label="LSGZ home"
         >
-          <span className="relative flex h-7 w-7 items-center justify-center rounded-md bg-foreground text-sm font-bold text-background">
-            L
-          </span>
+          {/* Custom logo — abstract line-art mark from craiyon_174614_image.png.
+              Dark-on-light logo, so we invert it in dark mode via the invert filter
+              so it stays visible on the dark background. */}
+          <img
+            src="/logo.png"
+            alt="LSGZ logo"
+            width={28}
+            height={28}
+            className="h-7 w-7 object-contain dark:invert"
+          />
           <span className="text-sm font-semibold tracking-tight text-foreground">
             {SITE.alias}
           </span>
