@@ -279,3 +279,41 @@ Stage Summary:
   2. L is now fully visible on all viewports — tight viewBox + `preserveAspectRatio="xMidYMid meet"` ensures the entire L (loop + stem + tail) always displays. Corrected the orientation so loop is on the LEFT and tail extends RIGHT (matching the user's reference).
   3. Sweep is now a PROGRESSIVE BRIGHTEN that travels along the path — left of sweep = bright, right of sweep = faded, exactly like `-===, =-==, ==-=, ===-`. Implemented via two stacked path layers (faded base + bright clipped overlay) where the clip rect grows from 0 → full width via requestAnimationFrame.
 - Lint clean, zero runtime errors, both themes verified, mobile verified, progressive sweep verified.
+
+---
+Task ID: portfolio-lsgz-comet-sweep
+Agent: main
+Task: User provided perfect_cursive_animationL.html with the exact sweep animation they wanted. Job: fit it perfectly so the L stays visible on both mobile and desktop, and fix the draw animation (was being drawn "in pieces instead of one go").
+
+Work Log:
+- Read the user's perfect_cursive_animationL.html reference — extracted the key technique:
+  - TWO paths: a base L (draws + fades) and a sweep path (same shape, single open path with no `z` or extra loops)
+  - The sweep uses `strokeDasharray = [segmentLength, totalLength]` so only ONE short bright segment is visible at a time
+  - `strokeDashoffset` is animated from `totalLength + segment` → `-segment` via a CSS transition — this makes the bright segment travel ALONG the path from start to end, following the L's curves (not a straight bar/clip rect)
+  - Trail gradient: pink (#ff33cc) → white (#ffffff) → pink, with transparent edges — gives the comet a glowing core
+  - Glow: dual drop-shadow (14px pink + 24px white)
+  - Sweep duration: 5s linear, fades out at 4.9s just before reset
+  - Random 5-9s interval between sweeps
+- Rewrote `src/components/illustrations/curvy-l.tsx` to use this exact technique:
+  - Used the single open path (no `z`, no extra loops) from the reference for BOTH the base and the sweep — this ensures the draw is one continuous stroke, not pieces
+  - Kept my responsive fixes from the previous iteration: tight viewBox (`-200 -200 11006 9810`) + `preserveAspectRatio="xMidYMid meet"` so the full L is always visible on every viewport
+  - Kept my orientation fix: `transform="translate(6400, 8320) scale(-1, -1)"` flips both axes so the loop is on the LEFT and the tail extends RIGHT
+  - Phase 1 (draw): uses `getTotalLength()` + `strokeDasharray`/`strokeDashoffset` CSS transition (1s ease-in-out) to draw the L in one smooth stroke. VLM confirmed: "drawn as ONE continuous smooth stroke (no broken segments)"
+  - Phase 2 (settled): the base transitions to a filled (not just stroked) version at 25% opacity, matching the reference's "faded" look
+  - Phase 3 (comet sweep): `strokeDasharray = [6% of path, total]`, `strokeDashoffset` animated from `total + segment` → `-segment` over 5s linear. Pink→white→pink trail gradient + dual drop-shadow glow. Fades out at 4.9s. Random 5-9s interval between sweeps.
+- Fixed the "drawn in pieces" issue: the previous version used Framer Motion's `pathLength` which can sometimes render segment-by-segment on complex paths. The new version uses the native `getTotalLength()` + `strokeDashoffset` CSS transition approach (same as the reference), which draws the path as one continuous stroke.
+- Ran `bun run lint` — clean (zero warnings, zero errors).
+- Verified via VLM (glm-4.6v):
+  - Draw phase (mid-draw at 600ms): "drawn as ONE continuous smooth stroke (no broken segments)... partially drawn... single L (not doubled)... loop on left, tail extending right" ✓
+  - Settled state: "full L visible... faded but visible (low opacity, ~25%)... single L, loop on left... no issues" ✓
+  - Comet sweep caught mid-travel: "bright glowing comet-like segment... pink color with glow... follows the curve of the L... looks like a comet traveling along the path" ✓
+  - Mobile (390x844): "cursive L visible... full structure intact (loop, stem, tail)... properly sized for mobile" ✓
+  - Light mode: "single L, loop on left, tail extending right... full L visible... no contrast issues on white" ✓
+  - Zero runtime errors.
+
+Stage Summary:
+- Ported the user's perfect sweep animation from perfect_cursive_animationL.html into the React component.
+- The L now: (1) draws in ONE smooth continuous stroke (not pieces), (2) settles to a faded state, (3) every 5-9s a bright pink→white→pink comet travels ALONG the L's path from start to end over 5s, following the curves. The comet has a dual drop-shadow glow and fades out just before reset so there's no visible return.
+- Responsive: full L always visible on mobile + desktop (tight viewBox + meet aspect ratio).
+- Orientation: loop on left, tail extending right (flip both axes).
+- Lint clean, zero runtime errors, both themes verified, mobile verified, comet sweep verified.
