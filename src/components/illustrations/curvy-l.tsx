@@ -123,29 +123,27 @@ export function CurvyL({ className }: { className?: string }) {
     <div
       ref={ref}
       className={cn(
-        "pointer-events-none absolute left-0 top-0 overflow-hidden",
+        "pointer-events-none absolute inset-0 overflow-hidden",
         className
       )}
       aria-hidden="true"
-      // FIXED size: the L stays the same physical size on ALL viewports.
-      // On wide desktop screens the full L (including tail) is visible and
-      // the tail reaches toward the right edge. On narrow mobile screens the
-      // container is wider than the viewport, so the hero's overflow:hidden
-      // crops the tail — the loop + stem on the left stay full-size.
-      // This is intentional: the L does NOT shrink on mobile, only the tail
-      // gets cut.
-      style={{
-        width: "900px",
-        height: "800px",
-      }}
     >
       <svg
         viewBox={viewBox}
-        // "meet" + xMinYMin: the entire L is visible, anchored to the top-left.
-        // The L scales to FIT the fixed-size container (no cropping of the L
-        // itself). The container's overflow:hidden handles tail cropping on
-        // narrow screens.
-        preserveAspectRatio="xMinYMin meet"
+        // "slice" + xMinYMin: the L scales to COVER the container (no empty
+        // space), anchored to the top-left. The L is LARGE — it fills the
+        // width on desktop so the tail reaches the right edge. The bottom
+        // overflows and is cropped by the container's overflow:hidden.
+        //
+        // On mobile (narrow): slice scales by HEIGHT (since the container is
+        // taller than the L's aspect ratio), so the L fills the height — the
+        // loop + stem stay full-size on the left, and the tail extends past
+        // the right edge where it gets cropped. The L does NOT shrink.
+        //
+        // On desktop (wide): slice scales by WIDTH, so the L fills the width
+        // — the tail reaches the right edge of the page, and the bottom of
+        // the L overflows below (cropped). The loop is at the top-left.
+        preserveAspectRatio="xMinYMin slice"
         className="h-full w-full"
       >
         <defs>

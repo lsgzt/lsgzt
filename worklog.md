@@ -346,3 +346,34 @@ Stage Summary:
 - Kept the perfect comet sweep animation from the user's reference.
 - Kept the one-smooth-stroke draw animation.
 - Lint clean, zero runtime errors, both themes verified, mobile verified (full-size L with cropped tail).
+
+---
+Task ID: portfolio-lsgz-large-full-width-l
+Agent: main
+Task: User provided a reference image (1783758182735.png) showing how the cursive L should look. Analysis revealed: the L should be LARGE (spanning nearly the full width of the page), with the loop at the top-left and the tail extending to the middle-right. The previous implementation was too small — a tiny shape in the top-left corner.
+
+Work Log:
+- Analyzed the reference image via VLM (glm-4.6v): "loop at top-left, tail extends to middle-right horizontally." The L should be large and span the full page width.
+- Compared reference vs current implementation: "reference has a large, full-width L that dominates the page, while the current implementation has a small, subtle L that lacks visual impact."
+- Diagnosed the problem: the previous version used a fixed 900×800px container with `preserveAspectRatio="xMinYMin meet"`, which scaled the entire L to fit inside that small box — making it tiny relative to the page.
+- Fixed `src/components/illustrations/curvy-l.tsx`:
+  - Changed the container from `absolute left-0 top-0` with fixed `width: 900px; height: 800px` to `absolute inset-0` (fills the entire hero)
+  - Changed `preserveAspectRatio` from `"xMinYMin meet"` (scales L to fit inside container — small) to `"xMinYMin slice"` (scales L to COVER the container — large, crops overflow)
+  - Result: the L now fills the full width of the hero on desktop (tail reaches the right edge), with the loop anchored to the top-left. The bottom of the L overflows below the viewport and is cropped by `overflow:hidden`.
+  - On mobile: `slice` scales by height (since the container is taller than the L's aspect ratio), so the L fills the height — the loop + stem stay full-size on the left, and the tail extends past the right edge where it gets cropped. The L does NOT shrink.
+- Kept everything else unchanged: the exact SVG path, the comet sweep animation, the draw-once animation, the flip transform (loop at top-left, tail extending right), the tight viewBox.
+- Ran `bun run lint` — clean (zero warnings, zero errors).
+- Verified via VLM (glm-4.6v) — compared reference vs new implementation:
+  - "L in image 2 spans the full width, matching the reference's large, wide design" ✓
+  - "Loop at top-left, consistent with the reference" ✓
+  - "Tail extends to the right edge" ✓
+  - "Image 2 is very close to the reference" ✓
+  - Mobile: "L is LARGE (not shrunk tiny)... loop visible at top-left... tail cropped on right... big background element" ✓
+  - Draw: "one continuous smooth stroke, large with full-width spanning, loop at top-left" ✓
+  - Light mode: "large, spans width, loop at top-left, tail to right edge, no contrast issues" ✓
+  - Zero runtime errors.
+
+Stage Summary:
+- The L is now LARGE — spanning the full width of the hero on desktop, matching the reference image. Loop at top-left, tail extending to the right edge. On mobile, the L stays large (fills the height) with only the tail cropped. No more tiny L.
+- Kept the perfect comet sweep and one-smooth-stroke draw animation.
+- Lint clean, zero runtime errors, both themes verified, mobile verified, matches reference.
