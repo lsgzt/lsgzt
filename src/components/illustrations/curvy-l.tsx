@@ -78,7 +78,7 @@ export function CurvyL({ className }: { className?: string }) {
           filter: "drop-shadow(0 0 12px rgba(186, 0, 255, 0.35))",
           opacity: visible ? 0.25 : 0,
           transition: "opacity 1.2s ease-in-out",
-          transform: "translateX(-25%)",
+          transform: "translateX(-5%)",
         }}
         draggable={false}
       />
