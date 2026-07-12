@@ -377,3 +377,31 @@ Stage Summary:
 - The L is now LARGE — spanning the full width of the hero on desktop, matching the reference image. Loop at top-left, tail extending to the right edge. On mobile, the L stays large (fills the height) with only the tail cropped. No more tiny L.
 - Kept the perfect comet sweep and one-smooth-stroke draw animation.
 - Lint clean, zero runtime errors, both themes verified, mobile verified, matches reference.
+
+---
+Task ID: portfolio-lsgz-png-l
+Agent: main
+Task: User said to forget the SVG approach and use a PNG image of the cursive L instead. The image (e75638d0-72e9-11f1-b939-4160f5885b4d.png) is already perfect to fit both mobile and desktop — just need to place it correctly. L on the left side, tail on the right side. On desktop, extend the tail; on mobile, crop the tail.
+
+Work Log:
+- Analyzed the user's PNG: 2688×1152 RGBA, transparent background, loop on the LEFT, tail extending to the RIGHT, wide aspect ratio (~2.33:1), purple-pink gradient stroke. Perfect for use as a background element.
+- Copied the PNG to `/home/z/my-project/public/curvy-l.png`.
+- Completely rewrote `src/components/illustrations/curvy-l.tsx` to use the PNG image instead of the SVG path:
+  - The component is now a simple `<div>` container with an `<img>` inside
+  - Container: `absolute left-0 top-0`, `height: 100%, width: 100%`, `overflow: hidden`
+  - Image: `absolute left-0 top-0`, `h-full w-auto max-w-none` — scales by HEIGHT (fills the hero height), width scales proportionally (much wider than viewport on mobile)
+  - On DESKTOP (wide): the image fills the hero height, the loop is at the upper-left, and the tail extends across to the right edge (or past it, cropped)
+  - On MOBILE (narrow): the image stays the same height (loop + stem full-size on the left), the tail extends past the right edge and gets cropped by overflow:hidden. The L does NOT shrink.
+  - Opacity: fades in from 0 → 0.25 over 1.2s on page load (gentle fade-in since we can't do a stroke-draw on a PNG)
+  - Filter: subtle drop-shadow glow (`drop-shadow(0 0 12px rgba(186, 0, 255, 0.35))`) to match the previous aesthetic
+- Removed all the SVG path code, the comet sweep animation, the stroke-dashoffset draw animation, the clipPath, the gradient defs — all replaced with a simple, performant image element.
+- Ran `bun run lint` — clean (zero warnings, zero errors).
+- Verified via VLM (glm-4.6v):
+  - Desktop: "loop on LEFT ✓, tail extends to RIGHT ✓, upper-left area ✓, large and prominent ✓, semi-transparent/faint ✓, matches reference style ✓"
+  - Mobile: "loop visible on left (full-size, not shrunk) ✓, tail cropped on right ✓, same large size as desktop ✓, upper-left ✓"
+  - Light mode: "large, loop on left, tail extending right, no contrast issues on white ✓"
+  - Zero runtime errors.
+
+Stage Summary:
+- Replaced the entire SVG-based cursive L with the user's PNG image. The L is now a simple, clean background decoration: loop on the left, tail extending to the right. On desktop the tail reaches the right edge; on mobile the tail gets cropped (L stays full-size). Fades in gently on page load, sits at 25% opacity as a faint background element with a subtle glow. Much simpler, more performant, and exactly matches the user's reference image.
+- Lint clean, zero runtime errors, both themes verified, mobile verified.
