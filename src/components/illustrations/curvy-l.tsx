@@ -68,12 +68,17 @@ export function CurvyL({ className }: { className?: string }) {
       <img
         src="/curvy-l.png"
         alt=""
-        className="absolute left-0 top-0 h-full w-auto max-w-none select-none"
+        // On mobile the image is smaller (55% height) so the L doesn't
+        // dominate the narrow screen. It scales up on larger viewports:
+        // sm 65%, md 80%, lg 100% (fills hero height).
+        // transform: translateX(-25%) crops ~25% off the LEFT side of the
+        // image (percentage is relative to the image's own width).
+        className="absolute left-0 top-0 h-[55%] w-auto max-w-none select-none sm:h-[65%] md:h-[80%] lg:h-full"
         style={{
-          // Gentle glow to match the previous SVG aesthetic
           filter: "drop-shadow(0 0 12px rgba(186, 0, 255, 0.35))",
           opacity: visible ? 0.25 : 0,
           transition: "opacity 1.2s ease-in-out",
+          transform: "translateX(-25%)",
         }}
         draggable={false}
       />
