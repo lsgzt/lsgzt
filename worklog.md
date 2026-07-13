@@ -405,3 +405,28 @@ Work Log:
 Stage Summary:
 - Replaced the entire SVG-based cursive L with the user's PNG image. The L is now a simple, clean background decoration: loop on the left, tail extending to the right. On desktop the tail reaches the right edge; on mobile the tail gets cropped (L stays full-size). Fades in gently on page load, sits at 25% opacity as a faint background element with a subtle glow. Much simpler, more performant, and exactly matches the user's reference image.
 - Lint clean, zero runtime errors, both themes verified, mobile verified.
+
+---
+Task ID: portfolio-lsgz-glass-logo-progress
+Agent: main
+Task: Three changes: (1) replace the circular profile placeholder in About section with the user's liquid glass card (from liquid_glass.html), using logo.png for the glass orb; (2) replace the current website logo (navbar, footer, loading screen, favicon) with logoblack.png; (3) fix the Lab section progress bars not showing on mobile.
+
+Work Log:
+- Copied logo.png (white abstract logo, 3264×3264, transparent) to /public/logo-glass.png (for the liquid glass card). Copied logoblack.png (black abstract logo, 771×771, transparent) to /public/logo.png (replacing the old logo — navbar, footer, loading screen, and favicon all reference /logo.png, so they all pick up the new logo automatically). The dark:invert class on the navbar/footer images makes the black logo appear white in dark mode.
+- Created `src/components/illustrations/liquid-glass-card.tsx` — a React port of the user's liquid_glass.html. Contains: aurora background (two animated radial-gradient layers with blur, slow + fast animations), grid mesh overlay, SVG glass orb (organic bubble shape with glassFill gradient, edgeGlow radial gradient, bubble-deform + float + rotate animations), glass overlay layers (3 divs with mix-blend-mode screen/overlay + blur), dust motes (5 animated dots), soft sweep reflection (triggers every 5-9s via JS class toggle + CSS keyframe animation), edge refraction (border + box-shadow), inner caustics (2 animated radial gradients), orbiting satellites (8 dots with orbit-spin animation), vignette, and the white logo (logo-glass.png) centered with float + glow-pulse animations. All keyframes prefixed with `lg` to avoid conflicts. Responsive: maxWidth = min(560px, 92vw), aspect-ratio 1, centered with margin auto.
+- Updated `src/components/sections/about.tsx` — replaced the old circular profile placeholder (abstract gradient bust SVG) with `<LiquidGlassCard />`. Added an overlay label below the card with name, role, and availability badge (theme-aware colors).
+- Fixed the Lab section progress bars on mobile in `src/components/sections/lab.tsx`:
+  - Removed `margin: "-40px"` from the `viewport` prop — this margin required the element to be 40px into the viewport before triggering, which on mobile (with taller single-column cards) meant the progress bar at the bottom of the card wasn't triggering until the user scrolled significantly further. Now `viewport={{ once: true }}` triggers as soon as any part of the card is visible.
+  - Increased the progress bar height from `h-1.5` (6px) to `h-2` (8px) for better visibility on mobile.
+- Verified via VLM (glm-4.6v):
+  - Navbar logo: "black abstract curved design (resembling a teardrop shape with an inner curve)" ✓
+  - About section liquid glass card: "liquid glass card (glassmorphism orb) with aurora-like background, animated glow, white abstract logo in center, small white dots scattered around the orb" ✓
+  - Liquid glass on mobile: "visible, properly sized for mobile, fits well within the mobile layout" ✓
+  - Lab progress bars on mobile: "Progress label visible, percentage visible (100%, 65%), colored horizontal bar with fill visible (green fully filled, gray partially filled)" ✓
+  - Zero runtime errors.
+
+Stage Summary:
+- Website logo replaced with logoblack.png everywhere (navbar, footer, loading screen, favicon) — the black teardrop abstract mark.
+- About section now shows the liquid glass card (glassmorphism orb with aurora, animated caustics, orbiting satellites, soft sweep reflection, and the white logo at center) instead of the old circular profile placeholder.
+- Lab section progress bars now show on mobile — fixed by removing the viewport margin constraint that was preventing the whileInView animation from triggering on taller mobile cards.
+- Lint clean, zero runtime errors, all changes verified.

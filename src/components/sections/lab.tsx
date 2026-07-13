@@ -58,12 +58,12 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
           <span className="text-muted-foreground">Progress</span>
           <span className="font-mono text-foreground/80">{experiment.progress}%</span>
         </div>
-        <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-secondary/80">
+        <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-secondary/80">
           <motion.div
             className={cn("h-full rounded-full bg-gradient-to-r", progressColor)}
             initial={{ width: 0 }}
             whileInView={{ width: `${experiment.progress}%` }}
-            viewport={{ once: true, margin: "-40px" }}
+            viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           />
         </div>

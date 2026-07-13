@@ -5,6 +5,7 @@ import { Sparkles, Rocket, BookOpen, Target } from "lucide-react";
 import { TIMELINE } from "@/lib/content/site";
 import { SectionHeading } from "@/components/site/section-heading";
 import { FadeIn } from "@/components/site/fade-in";
+import { LiquidGlassCard } from "@/components/illustrations/liquid-glass-card";
 
 const PILLARS = [
   {
@@ -44,59 +45,19 @@ export function About() {
         />
 
         <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-          {/* Portrait + pillars */}
+          {/* Liquid glass card */}
           <div className="lg:col-span-5">
             <FadeIn className="relative">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border bg-[#0a0a0c] shadow-[var(--card-shadow)]">
-                {/* Portrait placeholder — abstract gradient bust, not a real photo */}
-                <div className="absolute inset-0 bg-gradient-to-b from-violet-500/20 via-blue-500/10 to-transparent" />
-                <svg
-                  viewBox="0 0 200 250"
-                  className="absolute inset-0 h-full w-full"
-                  preserveAspectRatio="xMidYMid slice"
-                  aria-hidden="true"
-                >
-                  <defs>
-                    <radialGradient id="about-glow" cx="50%" cy="35%" r="50%">
-                      <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.4" />
-                      <stop offset="100%" stopColor="#7c3aed" stopOpacity="0" />
-                    </radialGradient>
-                    <linearGradient id="about-bust" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.9" />
-                      <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.45" />
-                    </linearGradient>
-                  </defs>
-                  <rect width="200" height="250" fill="url(#about-glow)" />
-                  {/* Abstract head + shoulders */}
-                  <circle cx="100" cy="90" r="34" fill="url(#about-bust)" opacity="0.75" />
-                  <path
-                    d="M 50 250 Q 50 170 100 170 Q 150 170 150 250 Z"
-                    fill="url(#about-bust)"
-                    opacity="0.65"
-                  />
-                  {/* Soft noise dots */}
-                  {Array.from({ length: 24 }).map((_, i) => (
-                    <circle
-                      key={i}
-                      cx={(i * 37) % 200}
-                      cy={(i * 53) % 250}
-                      r={((i * 7) % 6) / 10 + 0.2}
-                      fill="#ffffff"
-                      opacity={0.2}
-                    />
-                  ))}
-                </svg>
-
-                {/* Overlay label */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-xl border border-white/10 bg-black/40 px-4 py-3 backdrop-blur-md">
-                  <div>
-                    <div className="text-sm font-semibold text-white">Lovepreet Singh</div>
-                    <div className="text-xs text-white/60">AI Product Builder · LSGZ</div>
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-2.5 py-1 text-xs text-emerald-300 ring-1 ring-inset ring-emerald-500/30">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Available
-                  </span>
+              <LiquidGlassCard />
+              {/* Overlay label below the card */}
+              <div className="mt-4 flex items-center justify-between rounded-xl border border-border bg-card/70 px-4 py-3 backdrop-blur-md">
+                <div>
+                  <div className="text-sm font-semibold text-foreground">Lovepreet Singh</div>
+                  <div className="text-xs text-muted-foreground">AI Product Builder · LSGZ</div>
                 </div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs text-emerald-700 ring-1 ring-inset ring-emerald-500/25 dark:text-emerald-300">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Available
+                </span>
               </div>
             </FadeIn>
           </div>
