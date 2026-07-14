@@ -60,7 +60,7 @@ export function CurvyL({ className }: { className?: string }) {
       // Fade base to subtle filled version after draw completes
       addTimeout(() => {
         base.style.transition = "opacity 1.5s ease-in-out, fill 1s ease-in-out";
-        base.style.opacity = "0.25";
+        base.style.opacity = "0.35";
         base.style.fill = `url(#${gradientId})`;
       }, 1000);
 
@@ -153,7 +153,7 @@ export function CurvyL({ className }: { className?: string }) {
             style={{
               fill: "transparent",
               stroke: `url(#${gradientId})`,
-              strokeWidth: 150,
+              strokeWidth: 100,
               opacity: 1,
             }}
             d={path}
@@ -167,7 +167,7 @@ export function CurvyL({ className }: { className?: string }) {
             style={{
               fill: "none",
               stroke: `url(#${trailId})`,
-              strokeWidth: 180,
+              strokeWidth: 130,
               strokeLinecap: "round",
               strokeLinejoin: "round",
               opacity: 0,
