@@ -167,7 +167,7 @@ export function CurvyL({ className }: { className?: string }) {
             style={{
               fill: "none",
               stroke: `url(#${trailId})`,
-              strokeWidth: 90,
+              strokeWidth: 100,
               strokeLinecap: "round",
               strokeLinejoin: "round",
               opacity: 0,

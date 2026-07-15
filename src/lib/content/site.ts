@@ -8,7 +8,7 @@ export const SITE = {
   name: "Lovepreet Singh",
   alias: "LSGZ",
   role: "AI Product Builder",
-  email: "lovepreet@lsgz.dev",
+  email: "lovepreet.singh.dev@gmail.com",
   github: "https://github.com/lsgzt",
   githubHandle: "lsgzt",
   huggingface: "https://huggingface.co/lsgz/lsgz-personality-clone",
@@ -295,6 +295,6 @@ export const REPOS: Repo[] = [
 export const SOCIALS = [
   { label: "GitHub", href: SITE.github, handle: "@lsgzt" },
   { label: "Email", href: `mailto:${SITE.email}`, handle: SITE.email },
-  { label: "LinkedIn", href: "#", handle: "in/lovepreet-singh" },
+  { label: "LinkedIn", href: "https://in.linkedin.com/in/lovepreet-singh-3b3588287", handle: "in/lovepreet-singh-3b3588287" },
   { label: "Hugging Face", href: SITE.huggingface, handle: "@lsgz" },
 ] as const;
