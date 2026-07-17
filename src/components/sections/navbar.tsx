@@ -48,10 +48,18 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
     e.preventDefault();
     const id = href.replace("#", "");
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    // Close the mobile menu first
     setMobileOpen(false);
+    if (el) {
+      // Use window.scrollTo with the element's position relative to the document.
+      // This is more reliable than scrollIntoView when the layout is changing
+      // (e.g., mobile menu closing). The 80px offset accounts for the sticky navbar.
+      const top =
+        el.getBoundingClientRect().top + window.scrollY - 80;
+      setTimeout(() => {
+        window.scrollTo({ top, behavior: "smooth" });
+      }, 200);
+    }
   };
 
   return (

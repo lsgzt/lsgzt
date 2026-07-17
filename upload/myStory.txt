@@ -1,0 +1,475 @@
+
+My Story
+
+It started with a phone.
+
+I didn't begin with a computer science roadmap, a powerful development setup, or even a clear idea of what I wanted to build.
+
+I started by making small static HTML websites and hosting them from my phone. Seeing something I'd made become accessible on the internet for the first time was enough to make me curious:
+
+What else could I build?
+
+That curiosity eventually led me to Python.
+
+I didn't know the whole language—and I still wasn't writing everything from scratch. I used AI heavily, understood enough of the code to experiment with it, broke things constantly, and gradually learned by trying to make ideas actually work.
+
+And that's where things started getting interesting. 
+
+There was another part of this that shaped almost everything I built afterwards:
+
+I was doing it all from my phone.
+
+And it wasn't some unusually powerful phone either. I was using an OPPO A15, a fairly average Android phone.
+
+I just didn't want to give myself the excuse that I needed a laptop before I could start coding or making projects.
+
+So whenever my phone couldn't do something, I looked for a workaround.
+
+For simple scripts, I used Termux.
+
+For things that needed a GPU, I used Google Colab or Kaggle.
+
+If I couldn't comfortably manage and run a modern web project locally, I used AI agents that had their own computers.
+
+Later, when I started working on Android apps and couldn't use Android Studio on my phone, I used GitHub Actions to compile the APK remotely.
+
+I didn't have the ideal development environment.
+
+So I slowly built my own development environment out of whatever was available on the internet.
+
+
+---
+
+My first real AI project
+
+I discovered APIs, then found Groq, and decided to build a chatbot.
+
+Getting an AI response was surprisingly easy.
+
+Getting an AI assistant that actually remembered the conversation wasn't.
+
+Every message behaved like a completely new conversation. While trying to fix it, I learned something that seems obvious to me now: the API wasn't responsible for remembering everything. I had to build the memory layer myself.
+
+It was one of the first times a bug taught me more than a tutorial could.
+
+Eventually the chatbot worked.
+
+Naturally, my next thought was:
+
+Can I put this on Telegram?
+
+That sent me down another rabbit hole—Telegram's Bot API, hosting platforms, PythonAnywhere, webhooks, system prompts and increasingly complicated bot logic. 
+
+Some of those early experiments also explored persona design and generative-image workflows. They weren't all products worth keeping, but they taught me how separate AI services could be connected into one experience.
+
+
+---
+
+Then I found a problem actually worth solving.
+
+My father runs a shop where one of the things he does is prepare and print passport-size photographs.
+
+He used an AI tool to improve faces in photos.
+
+Then it became paid.
+
+So I thought:
+
+Why don't I build our own?
+
+That question became one of the most important projects I've made.
+
+I found CodeFormer and started experimenting with image-restoration APIs. But simply enhancing an image wasn't enough.
+
+I wanted to automate more of the workflow.
+
+So I built a Telegram bot that could take an uploaded photograph and process it through a pipeline:
+
+Upload → Enhance → Remove background → Make it white → Generate a print-ready sheet of passport photos
+
+The interesting part was how I built it.
+
+Different pieces were generated and debugged with different AI systems. I worked on each part separately and eventually connected everything into a single working pipeline.
+
+And it worked.
+
+My father actually used it. 
+
+
+---
+
+Then the API credits ran out.
+
+That could have been the end of it.
+
+Instead, I started looking for another way.
+
+I discovered that the model had a Hugging Face Space that, at the time, could be used freely. Getting my own program to reliably interact with it became an unexpectedly difficult problem.
+
+It took weeks of experimenting with AI-generated code, debugging and trying different approaches before I finally had a working solution.
+
+And suddenly I had something I'd originally built for one person that could process images without the API limitation I'd started with.
+
+Then something unexpected happened.
+
+Other people found the Telegram bot.
+
+No advertising.
+
+No subscription.
+
+No launch campaign.
+
+According to my bot's usage data, it eventually reached 1000+ users outside my father's use.
+
+That was probably the first time one of my experiments stopped feeling like an experiment. 
+
+
+---
+
+From a bot to a product
+
+Eventually I wondered:
+
+Why should this only exist inside Telegram?
+
+I used Manus AI to help create a web version and continued developing it from there.
+
+That became the image enhancer I maintain today.
+
+It's free, publicly accessible, and still being used by real people. 
+
+What started as:
+
+> "Dad's photo enhancer became paid."
+
+
+
+eventually became:
+
+> A tool used by people I'd never met.
+
+
+
+That's probably the best explanation of why I like building things.
+
+
+---
+
+Then I kept experimenting.
+
+Not everything needed to become a startup.
+
+Sometimes I built things simply because the technology sounded fun.
+
+After discovering AI voice conversion through YouTube, I started experimenting in Google Colab with converting voices and generating songs using my own and my friends' voices.
+
+It wasn't particularly useful.
+
+It was extremely fun.
+
+And it introduced me to another completely different area of AI. 
+
+
+---
+
+Could I train an AI to behave like me?
+
+Eventually another question appeared:
+
+Could I create a model that reflected my own personality?
+
+I started learning about model training, choosing a base model, preparing conversational data and concepts such as epochs and training loss.
+
+For the dataset, I collected examples from my own conversations and experimented with training a model around those communication patterns.
+
+The final result worked well enough that I published the model on my Hugging Face account.
+
+It wasn't something I needed.
+
+I built it because I wanted to know whether I could. 
+
+And that describes quite a few things I've made.
+
+
+---
+
+StreamPoint happened because typing with a TV remote sucks.
+
+After we got a smart set-top box, I ran into an incredibly ordinary problem.
+
+I had found various websites for discovering movies and anime, but repeatedly typing URLs with a television remote was miserable.
+
+So instead of continuing to type them...
+
+I made StreamPoint.
+
+A simple website that organized the destinations I wanted into one place.
+
+Open StreamPoint → choose where I want to go → done.
+
+I shared it with friends who watch movies and anime, and they started using it too. 
+
+Later, one of them casually told me:
+
+> "I watch movies through StreamPoint."
+
+
+
+That tiny sentence meant more to me than a page-view counter.
+
+He didn't call it "that website you made."
+
+He called it by its name.
+
+It had become a product in someone else's mind.
+
+
+---
+
+Then I tried to fix one of my own biggest problems.
+
+By this point, AI had made it possible for me to build things that would have been far beyond my coding knowledge otherwise.
+
+But developing from a phone still had an annoying workflow.
+
+I could ask an AI to generate some code, but then I'd have to copy it, move to an editor, paste it, test it, return to the AI, explain what happened, get another version and repeat.
+
+There were plenty of code editors for Android.
+
+There were plenty of AI coding tools.
+
+But I couldn't find an Android code editor that had the kind of deep AI integration I wanted—especially smart inline suggestions and the ability to actually write and work with code directly inside the editor.
+
+So eventually I thought:
+
+Why don't I build that too?
+
+That became PocketDev.
+
+
+---
+
+PocketDev
+
+PocketDev is an AI-powered code editor for Android built around the way I wished I could code on my phone.
+
+Instead of having AI as a separate chatbot that happens to know programming, I wanted it integrated directly into the editor.
+
+So PocketDev gradually gained things like:
+
+smart next-line AI suggestions,
+
+writing code with AI,
+
+finding bugs with AI,
+
+explaining code,
+
+automatic debugging,
+
+and a system that could attempt to fix code, run it again, inspect what went wrong and continue trying until it ran successfully.
+
+
+One of my favorite parts became the autocomplete interaction.
+
+When PocketDev shows a suggestion, I can swipe right to accept it.
+
+If I simply continue typing, the suggestion disappears.
+
+And for multiline suggestions, I can partially swipe to accept only one line and continue from there.
+
+I can't claim that interaction as an original idea.
+
+I first saw something similar while writing an email in Gmail. It predicted the rest of a sentence and told me to swipe right to accept it.
+
+I liked the interaction so much that I thought:
+
+Why shouldn't code completion work like that on a phone?
+
+So I adapted the idea for PocketDev.
+
+I think being honest about where an idea came from is much more interesting than pretending I invented everything myself.
+
+
+---
+
+PocketDev also showed me the limits of the way I build.
+
+PocketDev works.
+
+But it's not perfect.
+
+Larger files can still cause performance problems. The editor itself needs optimization. The way project files and context are provided to AI could be much better.
+
+I've considered using an open-source editor such as Sora Editor, but integrating it into what I'd already built while preserving the AI features and autocomplete turned out to be much harder than simply replacing one component.
+
+My current implementation is closer to a heavily extended text editor than the Android equivalent of a full desktop IDE.
+
+And ironically, improving it is made harder by the exact problem PocketDev is trying to solve:
+
+I'm developing an Android development tool from an Android phone.
+
+I can't open Android Studio, modify something and immediately look at the result.
+
+Sometimes I know exactly what tiny change I want.
+
+Maybe I just want:
+
+5px of padding → 10px.
+
+I could make that change myself.
+
+But I can't conveniently load, edit, compile and preview the Android project locally.
+
+So the workflow can become:
+
+change code → push to GitHub → GitHub Actions compiles APK → download/install build → open it → inspect the change → repeat
+
+Sometimes an entire APK has to be compiled just so I can find out whether a tiny UI adjustment looks right.
+
+It's frustrating.
+
+But there's something strangely appropriate about it too.
+
+PocketDev exists because developing from a phone is difficult—and PocketDev itself is being built through those same difficulties.
+
+It still has a lot to improve.
+
+That's part of why I'm still interested in it.
+
+
+---
+
+How I actually use AI
+
+There's another thing about the way I build that probably sounds strange at first.
+
+If AI gives me a piece of code, I test it, and it works correctly, I don't necessarily start asking:
+
+"Explain this function."
+
+"Explain that class."
+
+"Explain exactly how every part works."
+
+It's not because I think understanding code is unimportant.
+
+It's because when I'm actively building something, the AI's context window is part of my development environment.
+
+Sometimes I've spent a long conversation getting the model to understand exactly what a feature is supposed to do, how the existing code is structured and what problems we've already solved.
+
+If I then fill that conversation with explanations of things I don't currently need, eventually the earlier context starts disappearing.
+
+And if I later need to change the feature, the AI may no longer remember why the code was written that way in the first place.
+
+So I tend to learn things when they become relevant to what I'm changing or debugging.
+
+It's certainly not a perfect workflow.
+
+It also means there are times when I'm dependent on AI for modifications I could probably make much faster myself if I had a normal development setup and deeper knowledge of the codebase.
+
+I don't really want to hide that.
+
+AI is simultaneously the thing that has allowed me to build far beyond what I could otherwise build right now—and something that constantly shows me what I still need to learn.
+
+
+---
+
+Even the logo has a story.
+
+Eventually, if I was going to put all these things under one identity, I needed something that represented me.
+
+So I made the LSGZ logo.
+
+It didn't start with an AI image generator.
+
+It started with pen and paper.
+
+I drew the original idea myself, then later used AI to help polish and refine it digitally while keeping the identity of the original drawing.
+
+I like that little detail because, in a way, it's exactly how I've built most of my projects.
+
+The idea starts with me.
+
+The first version is usually imperfect.
+
+AI helps me push it much further.
+
+Then I keep changing things until they feel like mine.
+
+
+---
+
+And eventually, I needed somewhere to put all of this.
+
+After finishing Class 12 and preparing to begin B.Tech IT, I decided it was finally time to build a proper portfolio. 
+
+Not a page containing my name, three progress bars and a list of programming languages.
+
+I wanted somewhere that actually represented the things I'd been making.
+
+So, like most of my projects, I kept iterating.
+
+Different AI systems helped with different pieces. I changed layouts, threw things away, rebuilt sections, obsessed over tiny details and kept polishing until the website started feeling like mine.
+
+There wasn't one prompt that produced it.
+
+There wasn't one AI that built it.
+
+It slowly came together through different tools, different models, experiments, mistakes and a lot of tiny decisions.
+
+Even my logo—the symbol sitting above all of it—started as something I drew on a piece of paper.
+
+And that's the website you're reading now.
+
+
+---
+
+I don't really have a traditional development story.
+
+I didn't learn everything first and then start building.
+
+I did almost the opposite.
+
+I wanted something → tried to build it → got stuck → learned what I needed → got it working → found another problem.
+
+AI has been part of that process from the beginning.
+
+I don't pretend I manually wrote every line of code. I use AI aggressively—as a coding tool, debugger, researcher, designer and sometimes as a way of understanding technology I haven't encountered before.
+
+But deciding what should exist, connecting the pieces, dealing with things when they don't work, refining the experience and deciding when something is finally worth shipping—that part is mine.
+
+And doing all of this from a phone has forced me to get comfortable with another part of building:
+
+finding another way.
+
+Can't run something locally?
+
+Find somewhere that can.
+
+Need a GPU?
+
+Use Colab or Kaggle.
+
+Can't use Android Studio?
+
+Compile remotely with GitHub Actions.
+
+An API becomes paid?
+
+Find another approach.
+
+The tool I want doesn't exist on Android?
+
+Try building it.
+
+I didn't decide at the beginning that this would be some kind of philosophy.
+
+It just became the way I worked.
+
+And somehow, a journey that started with a few static HTML pages hosted from a phone turned into bots, AI experiments, trained models, an Android code editor and products used by people I've never met. 
+
+I'm still at the beginning.
+
+

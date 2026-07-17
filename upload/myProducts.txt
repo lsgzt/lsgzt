@@ -1,0 +1,449 @@
+Products
+
+EnhanceIt
+
+Give your photos a second life.
+
+An AI-powered image enhancement tool that restores clarity and detail in old, blurry, and low-quality photos—with a simple upload-and-enhance experience. 
+
+AI · Image Processing · Web App
+
+200+ monthly active users Live
+
+Try EnhanceIt ↗
+
+EnhanceIt — AI Image Enhancement, Without the Complexity
+
+EnhanceIt started with a simple idea: improving a bad photo shouldn't require knowing anything about image processing.
+
+Upload an image, let the enhancement pipeline handle the work, and compare the result.
+
+Behind that simple interaction is an image-processing workflow built around AI restoration models and external inference infrastructure. I worked through deployment limitations, API behavior, image retrieval, processing states, failures, and the UI needed to make all of that feel like one seamless product.
+
+Today, EnhanceIt serves 200+ monthly active users with over 1000 registered users.
+
+What I built
+
+AI-powered photo enhancement and restoration
+
+Before/after comparison experience
+
+Image upload and processing workflow
+
+CodeFormer-based restoration
+
+Hugging Face / Gradio integration
+
+Python backend
+
+Error and processing-state handling
+
+Responsive interface
+
+Analytics and SEO
+
+Public deployment on Render 
+
+
+Stack
+
+Python CodeFormer Hugging Face Gradio HTML CSS JavaScript Render
+
+> What began as an image-processing experiment became a tool people actually use. 
+
+
+
+
+---
+
+StreamPoint
+
+Your starting point for streaming.
+
+A fast, minimal directory for discovering third-party movie and anime streaming platforms—all organized in one place. 
+
+Web · Discovery · Entertainment
+
+Live
+
+Explore StreamPoint ↗
+
+StreamPoint — Finding Where to Watch Shouldn't Be the Hard Part
+
+The internet has plenty of streaming websites. Finding the right one is the annoying part.
+
+I built StreamPoint as a lightweight navigation layer that organizes third-party streaming destinations into one simple interface.
+
+It doesn't host media itself. Instead, it focuses on discovery—giving users a cleaner starting point before they leave for the service they want.
+
+The project became particularly meaningful when people around me stopped calling it "your streaming website" and simply started calling it StreamPoint. 
+
+What I built
+
+Streaming-platform directory
+
+Movie and anime categories
+
+Fast navigation between sources
+
+Search/discovery-oriented interface
+
+Responsive mobile experience
+
+Dark cinematic visual identity
+
+Custom StreamPoint branding
+
+Public deployment 
+
+
+Stack
+
+HTML CSS JavaScript Cloudflare Pages
+
+> One place. Many destinations. That's StreamPoint. 
+
+
+
+
+---
+
+PocketDev AI
+
+Development shouldn't require a desk.
+
+A mobile-first AI coding environment designed to make writing, understanding, debugging, and working with code practical directly from an Android device.
+
+Developer Tools · AI · Android
+
+In Development
+
+View Project ↗
+
+PocketDev AI — A Development Environment That Fits in Your Pocket
+
+PocketDev AI came from a problem I understand personally: building software without always having access to a traditional desktop development setup.
+
+Phones are incredibly capable computers, yet most development tools still assume you're sitting in front of a laptop.
+
+I constantly found myself generating code with AI, copying it, switching to an Android code editor, pasting it, testing it, returning to the AI, and repeating the process.
+
+Android had code editors. AI coding tools existed.
+
+But I couldn't find an Android editor that combined the two in the way I wanted.
+
+So PocketDev became my attempt at building one.
+
+Rather than squeezing a desktop IDE onto a small screen, the goal is to make AI part of the editor itself—helping write, understand, debug and work with code in an interface designed around a phone.
+
+What I'm building
+
+Mobile-first code editing
+
+Smart inline AI suggestions
+
+AI code generation
+
+AI-powered bug detection
+
+Code explanation
+
+Automatic debugging and fixing
+
+AI-assisted autocomplete
+
+Swipe-to-accept suggestions
+
+Partial swipe for multiline completions
+
+Android-focused touch interactions
+
+GitHub-oriented development workflow
+
+
+One of my favorite interactions is the autocomplete system: swipe right to accept a suggestion, or simply continue typing to reject it.
+
+For multiline suggestions, a partial swipe can accept only the current line.
+
+The interaction was inspired by Gmail's Smart Compose gesture and adapted for writing code on a phone.
+
+PocketDev works, but it's still an evolving project.
+
+Large files can lag, the editor architecture needs optimization, and there are still better ways to handle files and AI context.
+
+That's part of the project.
+
+> Some of my own projects were built from a phone. PocketDev asks how much better that experience could become. 
+
+
+
+
+---
+
+Experiments
+
+These should visually feel different from Products. Smaller cards, perhaps less dramatic artwork.
+
+The message should be:
+
+These aren't failed products. They're things I built because I wanted to understand something.
+
+
+---
+
+LSGZ Personality Clone
+
+What if an AI could sound a little more like me?
+
+An experimental conversational AI designed to reproduce elements of my communication style, preferences, and personality instead of behaving like a generic assistant. 
+
+LLM · Personality · Model Training
+
+Hugging Face Experiment
+
+View Experiment ↗
+
+Teaching an AI More Than Just Answers
+
+Most AI assistants are deliberately generic.
+
+I wanted to experiment with something different: whether an AI could maintain a recognizable communication style and personality.
+
+I collected conversational data, explored base-model selection, training, epochs and loss, and eventually trained a model around patterns from my own conversations.
+
+It wasn't intended to become another general-purpose chatbot.
+
+It was an experiment in making interaction itself part of the model experience.
+
+Explored
+
+Model training
+
+Conversational datasets
+
+LLM behavior
+
+Persistent conversational characteristics
+
+Persona construction
+
+Customized response style
+
+Hugging Face deployment
+
+Personalized AI interaction
+
+
+> The experiment wasn't just about what an AI says—it was about whether how it says it could become recognizable. 
+
+
+
+
+---
+
+Learn With Kia
+
+An AI learning companion built around asking questions naturally.
+
+An educational AI assistant exploring conversational learning, multimodal input, voice interaction, and accessible AI for students. 
+
+AI · Education · Multimodal
+
+Prototype
+
+Read the Story →
+
+Learn With Kia — Exploring a More Accessible AI Tutor
+
+Learn With Kia grew out of my earlier chatbot experiments and became an exploration of how conversational AI could support students, particularly where access to educational resources may be limited.
+
+Instead of limiting interaction to typed questions, the concept explored multiple ways for students to communicate with an assistant.
+
+Explored capabilities
+
+Conversational question answering
+
+Image understanding
+
+Voice input
+
+Multilingual interaction
+
+Educational assistance
+
+Telegram integration
+
+Online and local LLM approaches
+
+
+The project also became a testing ground for ideas that later influenced how I approached other AI products.
+
+> Sometimes a prototype is valuable not because it becomes the final product, but because of everything it teaches you to build next. 
+
+
+
+
+---
+
+Lab
+
+I'd introduce this section with something short:
+
+Not everything needs to become a product.
+
+Some things I build simply because I want to know what happens when I try.
+
+
+---
+
+Conversational AI
+
+Learning how AI conversations work by building them.
+
+A collection of Telegram-based AI experiments exploring conversation memory, multimodal input, group interactions, custom personas, voice recognition, and different LLM providers. 
+
+Telegram Bot API Python Flask Groq LLM APIs Memory Vision Speech
+
+Explore Experiments →
+
+
+---
+
+Local LLMs
+
+How much AI can you run on a phone?
+
+Experiments with running language models locally on Android through Termux, Ollama, llama.cpp, and GGUF models—including Qwen2.5 0.5B—to understand what useful offline AI looks like under tight hardware constraints. 
+
+Ollama llama.cpp GGUF Qwen Termux On-device AI
+
+
+---
+
+Voice AI / RVC
+
+Experiments in teaching machines a voice.
+
+Explored Retrieval-based Voice Conversion, model training, datasets, speech processing, and AI voice pipelines—including training a custom RVC voice model. 
+
+RVC Voice Conversion Model Training Audio Processing
+
+
+---
+
+Generative Image Lab
+
+Pixels, models, APIs and lots of failed requests.
+
+Experiments across generative-image and restoration models, Hugging Face Spaces, Stable Diffusion/SDXL workflows, CodeFormer and image-processing APIs.
+
+Some of this experimentation eventually evolved into EnhanceIt. 
+
+Stable Diffusion SDXL CodeFormer Hugging Face Image Processing
+
+I particularly like keeping that last sentence because it shows an actual progression:
+
+Experiment → learning → actual product.
+
+
+---
+
+Terms of Service Summarizer
+
+Making the text nobody reads easier to understand.
+
+An experimental tool for turning lengthy Terms of Service documents into shorter, understandable summaries using AI.
+
+Archived
+
+Archived after reliability limitations made it unsuitable for the level of accuracy I wanted. 
+
+And keep that sentence. Don't hide the fact that you abandoned something.
+
+A portfolio where apparently every idea became an amazing successful product feels fake.
+
+A portfolio containing:
+
+> "I built it. It wasn't reliable enough. I archived it."
+
+
+
+shows judgment.
+
+
+---
+
+And this website?
+
+I wouldn't put the portfolio itself beside EnhanceIt and StreamPoint.
+
+After the Lab section, I'd suddenly break the normal project layout with something like:
+
+And this website?
+
+That's a project too.
+
+LSGZ.dev
+
+The website behind the builder.
+
+My personal corner of the internet—a custom-designed home for the products I ship, experiments I try, and things I learn along the way. 
+
+Built Differently
+
+This website wasn't generated from a template or created from one giant prompt.
+
+It evolved section by section through dozens of iterations. I used different AI systems throughout the process for ideation, code, debugging, critique, and refinement—then brought those pieces together into one coherent product.
+
+And much of that process happened from an Android phone. 
+
+Read My Story →
+
+And that button should lead into the My Story page we just finalized.
+
+
+---
+
+The complete Projects page
+
+At the very top, before the first project, I'd put:
+
+Things I've built.
+
+Products people use, experiments that taught me something, and ideas I couldn't resist trying.
+
+Then immediately underneath, I'd use the line from the previous response that I still think is perfect for your site:
+
+> I don't build to fill a portfolio. The portfolio exists because I keep building. 
+
+
+
+Then:
+
+01 — Products
+EnhanceIt · StreamPoint · PocketDev AI
+
+02 — Experiments
+LSGZ Personality Clone · Learn With Kia
+
+03 — Lab
+Conversational AI · Local LLMs · Voice AI/RVC · Generative Image Lab · ToS Summarizer
+
+04 — This Website
+LSGZ.dev → My Story
+
+And there's a really nice connection now between the two pages:
+
+The Projects page answers:
+
+> "What has this person built?"
+
+
+
+The My Story page answers:
+
+> "How the hell did all of this happen?"
+
+
+
+Don't merge those into one enormous page. Let Projects show the output and My Story show the journey. Together they'll communicate far more about you than a traditional Skills/About/Experience portfolio ever could.
