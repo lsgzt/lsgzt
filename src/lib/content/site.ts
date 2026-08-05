@@ -33,10 +33,10 @@ export type Stat = {
 };
 
 export const STATS: Stat[] = [
+  { label: "Users Served", value: 1000, suffix: "+", description: "Across live products & bots" },
   { label: "Monthly Active Users", value: 200, suffix: "+", description: "On EnhanceIt alone" },
-  { label: "Registered Users", value: 1000, suffix: "+", description: "Across live products" },
-  { label: "Bot Users", value: 1000, suffix: "+", description: "Telegram bot reached organically" },
   { label: "Products Shipped", value: 3, description: "EnhanceIt · StreamPoint · PocketDev" },
+  { label: "AI Experiments", value: 7, description: "In the lab & beyond" },
 ];
 
 export type Project = {

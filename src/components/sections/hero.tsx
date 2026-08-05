@@ -98,9 +98,9 @@ export function Hero() {
           className="mx-auto mt-14 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-4 border-t border-border pt-6"
         >
           {[
-            { k: "4+", v: "Live products" },
-            { k: "9", v: "AI experiments" },
-            { k: "18", v: "Technologies" },
+            { k: "1000+", v: "Users served" },
+            { k: "3", v: "Products shipped" },
+            { k: "7", v: "AI experiments" },
           ].map((m) => (
             <div key={m.v} className="flex items-baseline gap-2">
               <span className="text-2xl font-semibold tracking-tight text-foreground">
