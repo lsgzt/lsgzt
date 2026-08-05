@@ -47,6 +47,8 @@ const statusVariants = cva(
           "bg-zinc-500/10 text-zinc-600 dark:text-zinc-300 ring-1 ring-inset ring-zinc-500/25",
         concept:
           "bg-zinc-500/10 text-zinc-600 dark:text-zinc-300 ring-1 ring-inset ring-zinc-500/25",
+        archived:
+          "bg-red-500/10 text-red-700 dark:text-red-300 ring-1 ring-inset ring-red-500/25",
       },
     },
   }

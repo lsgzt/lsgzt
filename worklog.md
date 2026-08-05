@@ -430,3 +430,41 @@ Stage Summary:
 - About section now shows the liquid glass card (glassmorphism orb with aurora, animated caustics, orbiting satellites, soft sweep reflection, and the white logo at center) instead of the old circular profile placeholder.
 - Lab section progress bars now show on mobile — fixed by removing the viewport margin constraint that was preventing the whileInView animation from triggering on taller mobile cards.
 - Lint clean, zero runtime errors, all changes verified.
+
+---
+Task ID: portfolio-lsgz-real-content
+Agent: main
+Task: Replace all placeholder content on the website with the user's actual story (myStory.txt) and actual products (myProducts.txt). Don't change the wording — just format with bold, italic, and blockquotes where appropriate.
+
+Work Log:
+- Read both uploaded files (myStory.txt — 476 lines of personal narrative; myProducts.txt — 446 lines with detailed product/experiment descriptions).
+- Updated `src/lib/content/site.ts`:
+  - Updated STATS to reflect real numbers: 200+ MAU, 1000+ registered users, 1000+ bot users, 3 products shipped
+  - Extended Project type with: detailedHeading, detailedDescription, builtList[], stack[], quote, stats[]
+  - Rewrote PROJECTS array with 3 real products (EnhanceIt, StreamPoint, PocketDev AI) using the user's exact wording from myProducts.txt — each with tagline, description, detailed heading, detailed description, what-I-built checklist, stack, quote, and stats
+  - Extended Experiment type with: tagline, longDescription, tags[], link, linkLabel, exploredList[], quote, category
+  - Rewrote EXPERIMENTS array with 7 real items: 2 experiments (LSGZ Personality Clone, Learn With Kia) with full detail + quotes, and 5 lab items (Conversational AI, Local LLMs, Voice AI/RVC, Generative Image Lab, ToS Summarizer) with compact data. ToS Summarizer marked as "archived" status.
+- Added "archived" status variant to StatusPill (red tone)
+- Rewrote `src/components/sections/projects.tsx`:
+  - Changed from compact 2-column cards to full-width case study layout (max-w-5xl, 1-column)
+  - Each card now shows: screenshot, name+tagline, tags, stats row, detailed heading, detailed description, "What I built" checklist (2-column grid with checkmarks), stack (mono chips), blockquote, and footer links
+  - Added opening quote: "I don't build to fill a portfolio. The portfolio exists because I keep building."
+- Rewrote `src/components/sections/lab.tsx`:
+  - Split into two groups: Experiments (detailed cards with longDescription, exploredList, quotes, links) and Lab (compact cards with tags + progress bars)
+  - Added "And this website?" card at the end — LSGZ.dev as a project, with the user's exact text about how the website was built, and a "Read My Story" link to the About section
+  - Added closing note about archived projects showing judgment
+- Rewrote `src/components/sections/about.tsx`:
+  - Replaced the old pillars + timeline with the user's full story from myStory.txt
+  - 15 story sections, each with a heading and formatted paragraphs
+  - Formatting applied: bold for key phrases/emphasis, italic for reflective/aside thoughts, blockquotes for the 3 quoted lines ("Dad's photo enhancer became paid.", "A tool used by people I'd never met.", "I watch movies through StreamPoint."), bullet lists for the workarounds (Termux, Colab, AI agents, GitHub Actions) and PocketDev features
+  - Liquid glass card centered above the story
+  - Max-width 4xl for readability, full long-form narrative
+- Ran `bun run lint` — clean (zero warnings, zero errors).
+- Verified via DOM inspection:
+  - Projects: 3 cards (EnhanceIt, StreamPoint, PocketDev AI), each with builtList (10, 8, 11 items respectively), quotes, and stats ✓
+  - Lab: 7 cards (2 experiments with quotes + 5 lab items), plus "this website" card ✓
+  - About: 15 story sections with all headings matching myStory.txt, 3 blockquotes with exact user wording ✓
+  - Zero runtime errors.
+
+Stage Summary:
+- All placeholder content replaced with the user's actual story and products. Wording preserved exactly as written in myStory.txt and myProducts.txt. Formatting applied: bold for emphasis, italic for asides, blockquotes for quoted lines, bullet lists for lists. Projects section now shows 3 full case studies with what-I-built checklists, stacks, and quotes. Lab section shows 2 detailed experiments + 5 compact lab items + "this website" card. About section is now the full long-form story with 15 sections.
