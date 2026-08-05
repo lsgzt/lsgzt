@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: false,
+  // Allow Arena's preview proxy (e2b.app) to load dev-mode resources
+  allowedDevOrigins: ["*.e2b.app"],
 };
 
 export default nextConfig;
