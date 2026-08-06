@@ -1,16 +1,18 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
 /**
  * Theme-aware LSGZ logo.
  *
- * - Light mode: black stroke (logo-black.png)
- * - Dark mode:  white stroke (logo-white.png)
+ * - Light mode (white page bg)  → black stroke   (logo-black.png)
+ * - Dark mode  (near-black bg)  → white stroke   (logo-white.png)
  *
- * Both files are transparent PNGs exported from the user's source SVGs,
- * so there's no need for CSS `invert` tricks — each asset is authored
- * in its final color. The `dark:` variant hides/shows the right image
- * via Tailwind (which is driven by the site's `class="dark"` theme
- * strategy, not just OS preference, so manual theme toggle works too).
+ * Renders nothing until the client has resolved the theme (avoids a
+ * hydration flash / wrong-color-on-first-paint) and then picks the right
+ * asset explicitly in JSX based on next-themes' resolvedTheme.
  */
 export function Logo({
   className,
@@ -21,26 +23,34 @@ export function Logo({
   size?: number;
   alt?: string;
 }) {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  // Until the client knows which theme is active, render a transparent
+  // placeholder reserving the same space — prevents a flash of wrong color.
+  if (!mounted) {
+    return (
+      <span
+        aria-hidden
+        className={cn("inline-block object-contain", className)}
+        style={{ width: size, height: size }}
+      />
+    );
+  }
+
+  const isDark = resolvedTheme === "dark";
+  const src = isDark ? "/logo-white.png" : "/logo-black.png";
+
   return (
-    <>
-      {/* Light mode: black mark */}
-      <img
-        src="/logo-black.png"
-        alt={alt}
-        width={size}
-        height={size}
-        className={cn("block h-auto w-full object-contain dark:hidden", className)}
-        draggable={false}
-      />
-      {/* Dark mode: white mark */}
-      <img
-        src="/logo-white.png"
-        alt={alt}
-        width={size}
-        height={size}
-        className={cn("hidden h-auto w-full object-contain dark:block", className)}
-        draggable={false}
-      />
-    </>
+    <img
+      src={src}
+      alt={alt}
+      width={size}
+      height={size}
+      className={cn("h-auto w-full object-contain", className)}
+      draggable={false}
+    />
   );
 }
