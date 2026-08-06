@@ -30,6 +30,7 @@ import { CurvyL } from "@/components/illustrations/curvy-l";
 import { FadeIn } from "@/components/site/fade-in";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import { Button } from "@/components/site/button";
+import { Logo } from "@/components/site/logo";
 import { cn } from "@/lib/utils";
 
 /* ─────────────────────────────────────────────────────────────
@@ -690,7 +691,7 @@ function LogoStoryVisual() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="surface-elevated gradient-border flex h-24 w-24 items-center justify-center"
       >
-        <img src="/logo.png" alt="LSGZ logo" className="h-14 w-14 object-contain dark:invert" />
+        <Logo size={56} className="h-14 w-14" />
       </motion.div>
     </div>
   );

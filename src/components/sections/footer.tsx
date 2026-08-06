@@ -3,6 +3,7 @@
 import { Github, Mail, ArrowUp } from "lucide-react";
 import { NAV_LINKS, SITE, SOCIALS } from "@/lib/content/site";
 import { AuroraBackground } from "@/components/site/aurora-background";
+import { Logo } from "@/components/site/logo";
 
 export function Footer() {
   const scrollTo = (id: string) => {
@@ -20,13 +21,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-5">
             <div className="flex items-center gap-2.5">
-              <img
-                src="/logo.png"
-                alt="LSGZ logo"
-                width={32}
-                height={32}
-                className="h-8 w-8 object-contain dark:invert"
-              />
+              <Logo size={32} className="h-8 w-8" />
               <span className="text-sm font-semibold tracking-tight">
                 {SITE.alias}
               </span>

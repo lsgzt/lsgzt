@@ -37,8 +37,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Lovepreet Singh" }],
   creator: "Lovepreet Singh",
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    // Favicon is always the white mark — it renders against the browser's
+    // tab/chrome background (which varies), so we use the higher-contrast
+    // white version regardless of site theme.
+    icon: "/logo-white.png",
+    apple: "/logo-white.png",
   },
   openGraph: {
     title: "Lovepreet Singh — Building AI products that people actually use",

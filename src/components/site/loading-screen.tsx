@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Logo } from "@/components/site/logo";
 
 /**
  * Brief loading animation shown on first paint — fades out as soon as the
@@ -39,22 +40,14 @@ export function LoadingScreen() {
                   ease: "easeInOut",
                 }}
               />
-              {/* The custom logo */}
-              <motion.img
-                src="/logo.png"
-                alt="LSGZ"
-                width={40}
-                height={40}
-                className="relative z-10 h-10 w-10 object-contain dark:invert"
-                animate={{
-                  scale: [1, 0.9, 1],
-                }}
-                transition={{
-                  duration: 1.4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
+              {/* The custom logo (theme-aware: black/white) */}
+              <motion.div
+                className="relative z-10 h-10 w-10"
+                animate={{ scale: [1, 0.9, 1] }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Logo size={40} className="h-10 w-10" />
+              </motion.div>
             </div>
 
             <motion.div

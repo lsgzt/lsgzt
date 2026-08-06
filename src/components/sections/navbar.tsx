@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Github, Menu, X, Command } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/content/site";
 import { ThemeToggle } from "@/components/site/theme-toggle";
+import { Logo } from "@/components/site/logo";
 import { cn } from "@/lib/utils";
 
 type NavbarProps = {
@@ -104,16 +105,8 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
           className="group flex items-center gap-2.5"
           aria-label="LSGZ home"
         >
-          {/* Custom logo — abstract line-art mark from craiyon_174614_image.png.
-              Dark-on-light logo, so we invert it in dark mode via the invert filter
-              so it stays visible on the dark background. */}
-          <img
-            src="/logo.png"
-            alt="LSGZ logo"
-            width={28}
-            height={28}
-            className="h-7 w-7 object-contain dark:invert"
-          />
+          {/* Theme-aware LSGZ mark — black in light mode, white in dark mode. */}
+          <Logo size={28} className="h-7 w-7" />
           <span className="text-sm font-semibold tracking-tight text-foreground">
             {SITE.alias}
           </span>
