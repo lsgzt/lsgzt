@@ -5,6 +5,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowLeft,
+  ArrowUpRight,
   Github,
   Smartphone,
   Terminal,
@@ -48,6 +49,33 @@ type Section = {
 };
 
 /* ── Reusable visual primitives ──────────────────────────── */
+
+/**
+ * Inline link used for product / experiment names inside body copy.
+ * Opens in a new tab, shows a subtle accent color, and a tiny arrow
+ * so readers know it leads off the page. Never alters the wrapped text.
+ */
+const PRODUCTS = {
+  EnhanceIt: "https://enhanceit.onrender.com",
+  "image enhancer": "https://enhanceit.onrender.com",
+  StreamPoint: "https://streampoint.pages.dev",
+  PocketDev: "https://github.com/lsgzt/pocket-codex",
+  "LSGZ Personality Clone": "https://huggingface.co/lsgz/lsgz-personality-clone",
+} as const;
+
+function P({ name, href }: { name: string; href: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group inline-flex items-baseline gap-0.5 font-medium text-violet-600 underline decoration-violet-500/30 underline-offset-[3px] transition-colors hover:text-violet-500 hover:decoration-violet-500 dark:text-violet-300 dark:hover:text-violet-200"
+    >
+      <span>{name}</span>
+      <ArrowUpRight className="mb-0.5 inline h-3 w-3 -translate-y-px opacity-60 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
+    </a>
+  );
+}
 
 function Tag({ children, accent = "violet" }: { children: React.ReactNode; accent?: "violet" | "blue" | "mixed" }) {
   return (
@@ -868,7 +896,7 @@ const SECTIONS: Section[] = [
       "Eventually I wondered:",
       <PullQuote key="q6">Why should this only exist inside Telegram?</PullQuote>,
       "I used Manus AI to help create a web version and continued developing it from there.",
-      "That became the image enhancer I maintain today.",
+      <>That became the <P name="image enhancer" href={PRODUCTS.EnhanceIt} /> I maintain today.</>,
       "It's free, publicly accessible, and still being used by real people. ",
       "What started as:",
       <PullQuote key="q7">"Dad's photo enhancer became paid."</PullQuote>,
@@ -919,9 +947,9 @@ const SECTIONS: Section[] = [
       "After we got a smart set-top box, I ran into an incredibly ordinary problem.",
       "I had found various websites for discovering movies and anime, but repeatedly typing URLs with a television remote was miserable.",
       "So instead of continuing to type them...",
-      "I made StreamPoint.",
+      <>I made <P name="StreamPoint" href={PRODUCTS.StreamPoint} />.</>,
       "A simple website that organized the destinations I wanted into one place.",
-      "Open StreamPoint → choose where I want to go → done.",
+      <>Open <P name="StreamPoint" href={PRODUCTS.StreamPoint} /> → choose where I want to go → done.</>,
       "I shared it with friends who watch movies and anime, and they started using it too. ",
       "Later, one of them casually told me:",
       <PullQuote key="q10">"I watch movies through StreamPoint."</PullQuote>,
@@ -946,7 +974,7 @@ const SECTIONS: Section[] = [
       "But I couldn't find an Android code editor that had the kind of deep AI integration I wanted—especially smart inline suggestions and the ability to actually write and work with code directly inside the editor.",
       "So eventually I thought:",
       <PullQuote key="q11">Why don't I build that too?</PullQuote>,
-      "That became PocketDev.",
+      <>That became <P name="PocketDev" href={PRODUCTS.PocketDev} />.</>,
     ],
   },
   {
@@ -955,7 +983,7 @@ const SECTIONS: Section[] = [
     kicker: "PocketDev",
     title: "PocketDev",
     paragraphs: [
-      "PocketDev is an AI-powered code editor for Android built around the way I wished I could code on my phone.",
+      <><P name="PocketDev" href={PRODUCTS.PocketDev} /> is an AI-powered code editor for Android built around the way I wished I could code on my phone.</>,
       "Instead of having AI as a separate chatbot that happens to know programming, I wanted it integrated directly into the editor.",
       "So PocketDev gradually gained things like:",
       "smart next-line AI suggestions,",
@@ -966,14 +994,14 @@ const SECTIONS: Section[] = [
       "and a system that could attempt to fix code, run it again, inspect what went wrong and continue trying until it ran successfully.",
       "",
       "One of my favorite parts became the autocomplete interaction.",
-      "When PocketDev shows a suggestion, I can swipe right to accept it.",
+      <>When <P name="PocketDev" href={PRODUCTS.PocketDev} /> shows a suggestion, I can swipe right to accept it.</>,
       "If I simply continue typing, the suggestion disappears.",
       "And for multiline suggestions, I can partially swipe to accept only one line and continue from there.",
       "I can't claim that interaction as an original idea.",
       "I first saw something similar while writing an email in Gmail. It predicted the rest of a sentence and told me to swipe right to accept it.",
       "I liked the interaction so much that I thought:",
       <PullQuote key="q12">Why shouldn't code completion work like that on a phone?</PullQuote>,
-      "So I adapted the idea for PocketDev.",
+      <>So I adapted the idea for <P name="PocketDev" href={PRODUCTS.PocketDev} />.</>,
       "I think being honest about where an idea came from is much more interesting than pretending I invented everything myself.",
     ],
   },
@@ -983,13 +1011,13 @@ const SECTIONS: Section[] = [
     kicker: "Building the tool, with the tool",
     visual: <BuildCycleVisual />,
     paragraphs: [
-      "PocketDev also showed me the limits of the way I build.",
-      "PocketDev works.",
+      <><P name="PocketDev" href={PRODUCTS.PocketDev} /> also showed me the limits of the way I build.</>,
+      <><P name="PocketDev" href={PRODUCTS.PocketDev} /> works.</>,
       "But it's not perfect.",
       "Larger files can still cause performance problems. The editor itself needs optimization. The way project files and context are provided to AI could be much better.",
       "I've considered using an open-source editor such as Sora Editor, but integrating it into what I'd already built while preserving the AI features and autocomplete turned out to be much harder than simply replacing one component.",
       "My current implementation is closer to a heavily extended text editor than the Android equivalent of a full desktop IDE.",
-      "And ironically, improving it is made harder by the exact problem PocketDev is trying to solve:",
+      <>And ironically, improving it is made harder by the exact problem <P name="PocketDev" href={PRODUCTS.PocketDev} /> is trying to solve:</>,
       <PullQuote key="q13">I'm developing an Android development tool from an Android phone.</PullQuote>,
       "I can't open Android Studio, modify something and immediately look at the result.",
       "Sometimes I know exactly what tiny change I want.",
@@ -1002,7 +1030,7 @@ const SECTIONS: Section[] = [
       "Sometimes an entire APK has to be compiled just so I can find out whether a tiny UI adjustment looks right.",
       "It's frustrating.",
       "But there's something strangely appropriate about it too.",
-      "PocketDev exists because developing from a phone is difficult—and PocketDev itself is being built through those same difficulties.",
+      <><P name="PocketDev" href={PRODUCTS.PocketDev} /> exists because developing from a phone is difficult—and <P name="PocketDev" href={PRODUCTS.PocketDev} /> itself is being built through those same difficulties.</>,
       "It still has a lot to improve.",
       "That's part of why I'm still interested in it.",
     ],
