@@ -931,7 +931,7 @@ const SECTIONS: Section[] = [
       <PullQuote key="q9">Could I create a model that reflected my own personality?</PullQuote>,
       "I started learning about model training, choosing a base model, preparing conversational data and concepts such as epochs and training loss.",
       "For the dataset, I collected examples from my own conversations and experimented with training a model around those communication patterns.",
-      "The final result worked well enough that I published the model on my Hugging Face account.",
+      <>The final result worked well enough that I published <a href="https://huggingface.co/lsgz/lsgz-personality-clone" target="_blank" rel="noopener noreferrer" className="group inline-flex items-baseline gap-0.5 font-medium text-violet-600 underline decoration-violet-500/30 underline-offset-[3px] transition-colors hover:text-violet-500 hover:decoration-violet-500 dark:text-violet-300 dark:hover:text-violet-200">the model<span className="sr-only"> LSGZ Personality Clone</span> on my Hugging Face account<ArrowUpRight className="mb-0.5 inline h-3 w-3 -translate-y-px opacity-60 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" /></a>.</>,
       "It wasn't something I needed.",
       "I built it because I wanted to know whether I could. ",
       "And that describes quite a few things I've made.",
