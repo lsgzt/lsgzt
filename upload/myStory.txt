@@ -44,24 +44,182 @@ My first real AI project
 
 I discovered APIs, then found Groq, and decided to build a chatbot.
 
-Getting an AI response was surprisingly easy.
+I called it Kia.
 
-Getting an AI assistant that actually remembered the conversation wasn't.
+Its system prompt was almost embarrassingly simple:
 
-Every message behaved like a completely new conversation. While trying to fix it, I learned something that seems obvious to me now: the API wasn't responsible for remembering everything. I had to build the memory layer myself.
+"Your name is Kia. You are a friendly virtual assistant."
+
+That was basically it.
+
+But seeing a chatbot I'd made respond to me for the first time was enough.
+
+Then I noticed something annoying.
+
+Kia had the memory of a goldfish.
+
+I could tell it something, send another message, and it behaved like the previous conversation had never happened.
+
+At first, I thought this was something the AI or API was supposed to handle automatically.
+
+It wasn't.
+
+While trying to fix it, I learned that my own program had to keep the previous messages and send that conversation history back to the model whenever I wanted it to remember what we'd been talking about.
+
+That was my introduction to conversation memory.
 
 It was one of the first times a bug taught me more than a tutorial could.
 
-Eventually the chatbot worked.
+Eventually Kia could actually hold a conversation.
 
 Naturally, my next thought was:
 
 Can I put this on Telegram?
 
-That sent me down another rabbit hole—Telegram's Bot API, hosting platforms, PythonAnywhere, webhooks, system prompts and increasingly complicated bot logic. 
+That sent me down another rabbit hole—Telegram's Bot API, hosting platforms, PythonAnywhere, webhooks and increasingly complicated bot logic.
 
-Some of those early experiments also explored persona design and generative-image workflows. They weren't all products worth keeping, but they taught me how separate AI services could be connected into one experience.
+Generating correct working code with AI was a headache, but eventually Kia escaped Termux on my phone and became an actual Telegram bot I could message from anywhere.
 
+---
+
+DreamKia
+
+And while messing around with it, I discovered something that changed the direction of my experiments completely:
+
+system prompts.
+
+And then my mind immediately went somewhere it probably shouldn't have.
+
+Until then, Kia's system prompt basically said:
+
+"You're Kia. You're friendly."
+
+But the more I experimented, the more I realized that a system prompt could shape much more than a chatbot's name.
+
+I could tell the AI who it was supposed to be, how it should behave, and what kind of conversation it was supposed to have.
+
+And, naturally, the first question that came into my head was:
+
+Wait... what happens if I tell it to become an NSFW chatbot?
+
+There was only one reasonable way to answer that.
+
+I built one.
+
+I called it DreamKia.
+
+Instead of Kia's tiny "friendly virtual assistant" instruction, DreamKia had a much stronger character and roleplay-oriented prompt.
+
+Same basic idea of talking to an AI.
+
+Completely different experience.
+
+And it worked surprisingly well.
+
+That fascinated me.
+
+I hadn't trained anything.
+
+I hadn't modified the underlying model.
+
+I'd mostly changed the instructions surrounding it, yet it behaved like an entirely different character.
+
+For a while, I just experimented with that.
+
+Then, as usually happens with my projects, I got another idea.
+
+Text was starting to feel boring.
+
+What if DreamKia could actually generate what was happening?
+
+Around that time, I discovered SDXL.
+
+It could generate images from text.
+
+So the obvious thing would have been to add an image command to DreamKia:
+
+/image [describe whatever you want]
+
+But I didn't like that.
+
+Imagine you've already been talking to a character for several messages.
+
+The conversation already contains the setting and what's currently happening.
+
+Then suddenly the bot asks you:
+
+"Please describe the image you want."
+
+Why?
+
+We literally just spent ten messages describing it.
+
+So I tried something else.
+
+When DreamKia needed to generate an image, my script would take some of the recent messages from the conversation—both what the user had said and what DreamKia had replied.
+
+That gave it the recent context.
+
+From that context, the system could figure out what kind of scene matched the conversation and turn it into a prompt that SDXL could understand.
+
+Then SDXL generated the image.
+
+And the bot sent it straight back into the same Telegram chat.
+
+So from the user's perspective, there wasn't really:
+
+a chatbot
+and
+an image generator.
+
+You just talked to DreamKia.
+
+And when an image was generated, it actually matched the context of the conversation instead of making you explain everything again from scratch.
+
+And somehow...
+
+it worked ridiculously well.
+
+I shared DreamKia with some friends.
+
+They loved messing around with it too.
+
+The funny thing is, DreamKia started as a completely unserious experiment.
+
+I wasn't thinking:
+
+"Today I will study multimodal AI architecture."
+
+💀
+
+I basically thought:
+
+"Can I make an AI do spicy roleplay?"
+
+And somehow that stupid question led me from a chatbot with one tiny system prompt to thinking about:
+
+conversation memory,
+character behavior,
+system prompts,
+image-generation models,
+passing context between different AI systems,
+and making multiple models feel like one product.
+
+My first chatbot was basically:
+
+Send message → get AI response.
+
+DreamKia was the first time I started stitching different pieces together to create an experience that none of those pieces could provide alone.
+
+And after spending so much time making existing models behave differently, another question eventually appeared:
+
+What if I stopped changing someone else's model with prompts...
+
+...and actually trained one myself?
+
+That question led to one of the strangest things I've built.
+
+Could I train an AI to behave like me?
 
 ---
 
@@ -175,7 +333,7 @@ And it introduced me to another completely different area of AI.
 
 Could I train an AI to behave like me?
 
-Eventually another question appeared:
+Eventually, after stitching memory, system prompts, and image generation into DreamKia, another question appeared:
 
 Could I create a model that reflected my own personality?
 
