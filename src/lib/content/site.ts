@@ -131,13 +131,13 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "pocketdev",
-    name: "PocketDev AI",
+    name: "PocketDev",
     tagline: "Development shouldn't require a desk.",
     description:
       "A mobile-first AI coding environment designed to make writing, understanding, debugging, and working with code practical directly from an Android device.",
     longDescription:
-      "PocketDev AI came from a problem I understand personally: building software without always having access to a traditional desktop development setup. Phones are incredibly capable computers, yet most development tools still assume you're sitting in front of a laptop.",
-    detailedHeading: "PocketDev AI — A Development Environment That Fits in Your Pocket",
+      "PocketDev came from a problem I understand personally: building software without always having access to a traditional desktop development setup. Phones are incredibly capable computers, yet most development tools still assume you're sitting in front of a laptop.",
+    detailedHeading: "PocketDev — A Development Environment That Fits in Your Pocket",
     detailedDescription:
       "I constantly found myself generating code with AI, copying it, switching to an Android code editor, pasting it, testing it, returning to the AI, and repeating the process. Android had code editors. AI coding tools existed. But I couldn't find an Android editor that combined the two in the way I wanted. So PocketDev became my attempt at building one. Rather than squeezing a desktop IDE onto a small screen, the goal is to make AI part of the editor itself—helping write, understand, debug and work with code in an interface designed around a phone.",
     builtList: [
@@ -212,12 +212,12 @@ export const EXPERIMENTS: Experiment[] = [
   },
   {
     slug: "learn-with-kia",
-    name: "Learn With Kia",
+    name: "Learnigo",
     tagline: "An AI learning companion built around asking questions naturally.",
     description:
       "An educational AI assistant exploring conversational learning, multimodal input, voice interaction, and accessible AI for students.",
     longDescription:
-      "Learn With Kia grew out of my earlier chatbot experiments and became an exploration of how conversational AI could support students, particularly where access to educational resources may be limited. Instead of limiting interaction to typed questions, the concept explored multiple ways for students to communicate with an assistant. The project also became a testing ground for ideas that later influenced how I approached other AI products.",
+      "Learnigo grew out of my earlier chatbot experiments and became an exploration of how conversational AI could support students, particularly where access to educational resources may be limited. Instead of limiting interaction to typed questions, the concept explored multiple ways for students to communicate with an assistant. The project also became a testing ground for ideas that later influenced how I approached other AI products.",
     tags: ["AI", "Education", "Multimodal"],
     status: "exploring",
     progress: 60,
