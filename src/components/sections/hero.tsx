@@ -99,7 +99,7 @@ export function Hero() {
         >
           {[
             { k: "1000+", v: "Users served" },
-            { k: "3", v: "Products shipped" },
+            { k: "4", v: "Products shipped" },
             { k: "7", v: "AI experiments" },
           ].map((m) => (
             <div key={m.v} className="flex items-baseline gap-2">
