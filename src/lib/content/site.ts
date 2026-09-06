@@ -36,7 +36,7 @@ export type Stat = {
 export const STATS: Stat[] = [
   { label: "Users Served", value: 1000, suffix: "+", description: "Across live products & bots" },
   { label: "Monthly Active Users", value: 200, suffix: "+", description: "On EnhanceIt alone" },
-  { label: "Products Shipped", value: 3, description: "EnhanceIt · StreamPoint · PocketDev" },
+  { label: "Products Shipped", value: 4, description: "NextLecture · EnhanceIt · StreamPoint · PocketDev" },
   { label: "AI Experiments", value: 7, description: "In the lab & beyond" },
 ];
 
@@ -61,6 +61,56 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
+  {
+    slug: "nextlecture",
+    name: "NextLecture",
+    tagline: "Never miss a lecture again.",
+    description:
+      "A college timetable app for GNDEC students that shows your next lecture, fires local reminders, and keeps attendance, notices, and previous-year papers in one simple place.",
+    longDescription:
+      "NextLecture started after I accidentally missed a lecture because I was too tired from the previous one and forgot I had another class. I straight went home — and only then realized \"oh shit, I had a lecture left.\" I built a timetable app that can remind me before lectures so I would never miss them again—and then kept adding features until many students in college started using it.",
+    detailedHeading: "NextLecture — A Simple Timetable That Actually Reminds You",
+    detailedDescription:
+      "I accidentally missed a lecture in college because I got too tired in one class and literally forgot I had another. I straight went home, and then it hit me: \"oh shit, I had a lecture left.\" So I decided to make a timetable app that can remind me before lectures. Later I added many features, and now many students in college actually use NextLecture because it provides a simple interface for the college timetable rather than searching through the college website. The product spans a native Android app and a mobile-first web companion at nextlecture.vercel.app: offline-first timetable with live next-lecture countdown, local AlarmManager reminders that work without network, hybrid HTML + Groq parsing of the official GNDEC timetable, multi-year section discovery, attendance tracking, previous-year papers, and a PWA web dashboard that answers what is next, when it starts, and where to go.",
+    builtList: [
+      "Next-lecture card with live countdown and free-period detection",
+      "Local offline lecture reminders (AlarmManager + boot reschedule)",
+      "Official GNDEC timetable fetch with ETag / Last-Modified caching",
+      "Hybrid deterministic + Groq AI parsing for ambiguous cells",
+      "Dynamic group / multi-year section discovery from department sites",
+      "Offline-first Room cache and full day view (completed / happening / upcoming)",
+      "Attendance marking with target %, max misses, and recovery guidance",
+      "Student profile lookup from official 2026 branch PDFs",
+      "Previous-year papers and PYQ RAG support",
+      "Mobile-first web app (PWA) at nextlecture.vercel.app",
+      "Announcements feed and in-app GitHub release updates",
+    ],
+    stack: [
+      "Kotlin",
+      "Android",
+      "Room",
+      "AlarmManager",
+      "Jsoup",
+      "Groq",
+      "TypeScript",
+      "React",
+      "Vite",
+      "Vercel",
+      "Supabase",
+    ],
+    quote:
+      "I built it so I would never miss a lecture again. Now many students in college use it because the college website was never this simple.",
+    tags: ["Education", "Android", "Web App", "Timetable"],
+    liveUrl: "https://nextlecture.vercel.app",
+    sourceUrl: "https://github.com/lsgzt/nextlecture-android",
+    status: "live",
+    accent: "blue",
+    stats: [
+      { label: "Platforms", value: "Android + Web" },
+      { label: "Status", value: "Live" },
+      { label: "College", value: "GNDEC" },
+    ],
+  },
   {
     slug: "enhanceit",
     name: "EnhanceIt",
@@ -371,6 +421,14 @@ export type Repo = {
 };
 
 export const REPOS: Repo[] = [
+  {
+    name: "nextlecture-android",
+    description: "GNDEC timetable & lecture reminder app for Android.",
+    language: "Kotlin",
+    stars: 0,
+    forks: 0,
+    url: "https://github.com/lsgzt/nextlecture-android",
+  },
   {
     name: "pocket-codex",
     description: "AI-powered code editor for Android with on-device assistant.",
