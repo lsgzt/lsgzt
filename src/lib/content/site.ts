@@ -71,12 +71,12 @@ export const PROJECTS: Project[] = [
       "NextLecture started after I accidentally missed a lecture because I was too tired from the previous one and forgot I had another class. I straight went home — and only then realized \"oh shit, I had a lecture left.\" I built a timetable app that can remind me before lectures so I would never miss them again—and then kept adding features until many students in college started using it.",
     detailedHeading: "NextLecture — A Simple Timetable That Actually Reminds You",
     detailedDescription:
-      "I accidentally missed a lecture in college because I got too tired in one class and literally forgot I had another. I straight went home, and then it hit me: \"oh shit, I had a lecture left.\" So I decided to make a timetable app that can remind me before lectures. Later I added many features, and now many students in college actually use NextLecture because it provides a simple interface for the college timetable rather than searching through the college website. The product spans a native Android app and a mobile-first web companion at nextlecture.vercel.app: offline-first timetable with live next-lecture countdown, local AlarmManager reminders that work without network, hybrid HTML + Groq parsing of the official GNDEC timetable, multi-year section discovery, attendance tracking, previous-year papers, and a PWA web dashboard that answers what is next, when it starts, and where to go.",
+      "I accidentally missed a lecture in college because I got too tired in one class and literally forgot I had another. I straight went home, and then it hit me: \"oh shit, I had a lecture left.\" So I decided to make a timetable app that can remind me before lectures. Later I added many features, and now many students in college actually use NextLecture because it provides a simple interface for the college timetable rather than searching through the college website. The product spans a native Android app and a mobile-first web companion at nextlecture.vercel.app: offline-first timetable with live next-lecture countdown, local AlarmManager reminders that work without network, hybrid HTML + Gemini parsing of the official GNDEC timetable, multi-year section discovery, attendance tracking, previous-year papers, and a PWA web dashboard that answers what is next, when it starts, and where to go.",
     builtList: [
       "Next-lecture card with live countdown and free-period detection",
       "Local offline lecture reminders (AlarmManager + boot reschedule)",
       "Official GNDEC timetable fetch with ETag / Last-Modified caching",
-      "Hybrid deterministic + Groq AI parsing for ambiguous cells",
+      "Hybrid deterministic + Gemini AI parsing for ambiguous cells",
       "Dynamic group / multi-year section discovery from department sites",
       "Offline-first Room cache and full day view (completed / happening / upcoming)",
       "Attendance marking with target %, max misses, and recovery guidance",
@@ -91,7 +91,7 @@ export const PROJECTS: Project[] = [
       "Room",
       "AlarmManager",
       "Jsoup",
-      "Groq",
+      "Gemini",
       "TypeScript",
       "React",
       "Vite",
