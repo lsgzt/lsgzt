@@ -24,6 +24,10 @@ import {
   Globe,
   ArrowRight,
   Compass,
+  Bell,
+  Clock,
+  BookOpen,
+  MapPin,
 } from "lucide-react";
 import { AuroraBackground } from "@/components/site/aurora-background";
 import { CurvyL } from "@/components/illustrations/curvy-l";
@@ -62,6 +66,7 @@ const PRODUCTS = {
   StreamPoint: "https://streampoint.pages.dev",
   PocketDev: "https://github.com/lsgzt/pocket-codex",
   "LSGZ Personality Clone": "https://huggingface.co/lsgz/lsgz-personality-clone",
+  NextLecture: "https://nextlecture.vercel.app",
 } as const;
 
 function P({ name, href }: { name: string; href: string }) {
@@ -802,6 +807,90 @@ function PullQuote({ children }: { children: React.ReactNode }) {
   );
 }
 
+
+function NextLectureVisual() {
+  return (
+    <div className="relative mx-auto my-10 w-full max-w-md">
+      <div className="surface-elevated p-5 sm:p-6">
+        <div className="mb-4 flex items-center gap-2 border-b border-border pb-3">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500/15 text-blue-500">
+            <Bell className="h-4 w-4" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold">NextLecture</p>
+            <p className="text-[11px] text-muted-foreground">what&apos;s next · offline reminders</p>
+          </div>
+          <span className="ml-auto flex h-2 w-2 rounded-full bg-emerald-500" />
+        </div>
+
+        {/* Next lecture card mock */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+          className="rounded-2xl border border-border bg-gradient-to-br from-blue-500/10 via-violet-500/5 to-transparent p-4"
+        >
+          <div className="mb-2 flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wider text-blue-600 dark:text-blue-300">
+            <Clock className="h-3 w-3" />
+            Next up
+          </div>
+          <p className="text-base font-semibold tracking-tight">Data Structures</p>
+          <div className="mt-2 flex flex-wrap gap-3 text-xs text-muted-foreground">
+            <span className="inline-flex items-center gap-1">
+              <Clock className="h-3 w-3" /> 11:00 – 12:00
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <MapPin className="h-3 w-3" /> Block B · 204
+            </span>
+          </div>
+          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-secondary">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-blue-500 to-violet-500"
+              initial={{ width: "0%" }}
+              whileInView={{ width: "68%" }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.1, ease: "easeOut", delay: 0.2 }}
+            />
+          </div>
+          <p className="mt-1.5 text-[10px] text-muted-foreground">reminder set · 15 min before</p>
+        </motion.div>
+
+        {/* Spread story chips */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          {[
+            { icon: <BookOpen className="h-3 w-3" />, label: "Four clicks → one card" },
+            { icon: <Users className="h-3 w-3" />, label: "Classmate leaned over" },
+            { icon: <Sparkles className="h-3 w-3" />, label: "No ads. No launch." },
+          ].map((it, i) => (
+            <motion.span
+              key={it.label}
+              initial={{ opacity: 0, y: 6 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: 0.15 + i * 0.08 }}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
+            >
+              {it.icon}
+              {it.label}
+            </motion.span>
+          ))}
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+          className="mt-4 text-center text-xs text-muted-foreground"
+        >
+          Day four of college. The lecture was cancelled — the app wasn&apos;t.
+        </motion.p>
+      </div>
+    </div>
+  );
+}
+
 /* ── Story content (every paragraph preserved verbatim) ─── */
 
 const SECTIONS: Section[] = [
@@ -1203,8 +1292,39 @@ const SECTIONS: Section[] = [
     ],
   },
   {
-    id: "closing",
+    id: "nextlecture",
     chapter: "16",
+    kicker: "College, day four",
+    title: "The lecture I never actually missed",
+    visual: <NextLectureVisual />,
+    paragraphs: [
+      "Then I actually joined college.",
+      "And almost immediately, one thing annoyed me.",
+      "Wanting to know my own timetable meant opening the college website, finding my branch, then my section, then the day, then the time. Every morning. No app, no reminder, just four clicks I had to remember myself.",
+      "Then I noticed something else.",
+      "I kept forgetting to check it.",
+      "Four days into college, I found out how badly.",
+      "I was bored in one lecture — properly bored — and by the time it ended I'd already checked out in my head. I packed my bag and went home.",
+      "Then it hit me.",
+      <PullQuote key="q-nl-1">Wait. I had one more lecture.</PullQuote>,
+      "I'd completely forgotten it existed.",
+      "So I decided that if the website wasn't going to remind me, I'd build something that would.",
+      <>I called it <P name="NextLecture" href={PRODUCTS.NextLecture} />.</>,
+      "I found out later that the lecture I thought I'd skipped had actually been cancelled that day. There was nothing to miss.",
+      "It didn't matter. I kept building it anyway.",
+      "It slowly turned into something real: a live \"what's next\" card, offline reminders that fire without needing the internet, attendance tracking, old papers — everything those four clicks never gave me.",
+      "Somewhere along the way I made it pull a student's info straight from the college site, mostly so I could check my own registration number without opening the portal.",
+      "I was doing exactly that in class one day when the guy behind me leaned over.",
+      <PullQuote key="q-nl-2">What's that?</PullQuote>,
+      <>\"NextLecture,\" I said. \"I made it.\"</>,
+      "He tried it. Told a friend. That friend told another.",
+      "No ads. No launch post. Just someone behind me, curious about my own registration number.",
+      "Four days into college. I didn't know most of my classmates' names yet, and some of them were already using something I'd built.",
+    ],
+  },
+  {
+    id: "closing",
+    chapter: "17",
     kicker: "How I work",
     visual: <ClosingVisual />,
     paragraphs: [
