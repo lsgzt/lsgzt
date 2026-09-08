@@ -1312,11 +1312,11 @@ const SECTIONS: Section[] = [
       <>I called it <P name="NextLecture" href={PRODUCTS.NextLecture} />.</>,
       "I found out later that the lecture I thought I'd skipped had actually been cancelled that day. There was nothing to miss.",
       "It didn't matter. I kept building it anyway.",
-      "It slowly turned into something real: a live \"what's next\" card, offline reminders that fire without needing the internet, attendance tracking, old papers — everything those four clicks never gave me.",
+      "It slowly turned into something real: a live "what's next" card, offline reminders that fire without needing the internet, attendance tracking, old papers — everything those four clicks never gave me.",
       "Somewhere along the way I made it pull a student's info straight from the college site, mostly so I could check my own registration number without opening the portal.",
       "I was doing exactly that in class one day when the guy behind me leaned over.",
       <PullQuote key="q-nl-2">What's that?</PullQuote>,
-      <>\"NextLecture,\" I said. \"I made it.\"</>,
+      <>"NextLecture," I said. "I made it."</>
       "He tried it. Told a friend. That friend told another.",
       "No ads. No launch post. Just someone behind me, curious about my own registration number.",
       "Four days into college. I didn't know most of my classmates' names yet, and some of them were already using something I'd built.",
